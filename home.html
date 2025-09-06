@@ -12,22 +12,28 @@
 
         /* Custom Color Palette */
         :root {
-            --primary-color: #d4a373;
-            --secondary-color: #f7e9e3;
+            --primary-color: #1A2E5C;
+            --secondary-color: #2ABFAC;
+            --background-color: #F5F5F5;
             --dark-color: #333;
             --light-color: #fff;
-            --accent-color: #8d99ae;
+            --cta-color: #FF9900;
+            --accent-color: #C0C0C0;
         }
 
         .bg-primary { background-color: var(--primary-color); }
         .text-primary { color: var(--primary-color); }
         .bg-secondary { background-color: var(--secondary-color); }
-        .bg-dark { color: var(--dark-color); }
+        .text-secondary { color: var(--secondary-color); }
+        .bg-background { background-color: var(--background-color); }
         .text-dark { color: var(--dark-color); }
+        .bg-cta { background-color: var(--cta-color); }
+        .text-cta { color: var(--cta-color); }
+        .text-accent { color: var(--accent-color); }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--secondary-color);
+            background-color: var(--background-color);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             color: var(--dark-color);
@@ -103,6 +109,7 @@
             left: 0;
             right: 0;
             z-index: 50;
+            background-color: var(--light-color); /* Added solid background color */
         }
 
         .bottom-nav {
@@ -111,6 +118,7 @@
             left: 0;
             right: 0;
             z-index: 50;
+            background-color: var(--light-color); /* Added solid background color */
         }
 
         /* Wishlist button on product card */
@@ -175,7 +183,7 @@
         .category-card {
             display: flex;
             align-items: center;
-            background-color: #f9f9f9;
+            background-color: var(--background-color);
             padding: 12px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -201,7 +209,7 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 400px;
-            background-color: white;
+            background-color: var(--light-color);
             border-radius: 16px;
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
             padding: 16px;
@@ -223,7 +231,7 @@
             left: 0;
             right: 0;
             height: 50vh;
-            background-color: white;
+            background-color: var(--light-color);
             border-radius: 16px 16px 0 0;
             box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
             padding: 24px;
@@ -237,57 +245,57 @@
         
     </style>
 </head>
-<body class="bg-secondary">
+<body class="bg-background">
     <div id="toast" class="toast"></div>
 
-    <header class="fixed-header hidden md:block bg-white shadow-md py-4">
+    <header class="fixed-header hidden md:block bg-light shadow-md py-4">
         <div class="max-w-screen-xl mx-auto px-6 flex justify-between items-center">
             <h1 class="text-3xl font-bold text-primary">Stylfy</h1>
             
             <div class="flex-1 max-w-lg mx-8 relative">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                <input type="text" placeholder="Search for products" class="w-full pl-12 pr-4 py-2 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300">
+                <input type="text" placeholder="Search for products" class="w-full pl-12 pr-4 py-2 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-300">
             </div>
 
             <div class="flex items-center space-x-6">
-                <a href="#" class="font-medium text-dark hover:text-primary transition-colors">Men</a>
-                <a href="#" class="font-medium text-dark hover:text-primary transition-colors">Women</a>
-                <a href="#" class="font-medium text-dark hover:text-primary transition-colors">Boy</a>
-                <a href="#" class="font-medium text-dark hover:text-primary transition-colors">Girl</a>
-                <a href="#" class="text-xl text-dark hover:text-primary transition-colors" data-view="wishlist" onclick="showView('wishlist', this)">
+                <a href="#" class="font-medium text-dark hover:text-secondary transition-colors">Men</a>
+                <a href="#" class="font-medium text-dark hover:text-secondary transition-colors">Women</a>
+                <a href="#" class="font-medium text-dark hover:text-secondary transition-colors">Boy</a>
+                <a href="#" class="font-medium text-dark hover:text-secondary transition-colors">Girl</a>
+                <a href="#" class="text-xl text-dark hover:text-secondary transition-colors" data-view="wishlist" onclick="showView('wishlist', this)">
                     <i class="fas fa-heart"></i> </a>
-                <a href="#" class="text-xl text-dark hover:text-primary transition-colors" data-view="cart" onclick="showView('cart', this)">
+                <a href="#" class="text-xl text-dark hover:text-secondary transition-colors" data-view="cart" onclick="showView('cart', this)">
                     <i class="fas fa-shopping-cart"></i> </a>
             </div>
         </div>
     </header>
 
-    <header class="fixed-header md:hidden bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <header class="fixed-header md:hidden bg-light shadow-md py-4 px-6 flex justify-between items-center">
         <h1 class="text-3xl font-bold text-primary">Stylfy</h1>
         <div class="flex items-center space-x-4">
-            <i id="mobile-search-btn" class="fas fa-search text-xl text-dark hover:text-primary transition-colors cursor-pointer"></i>
-            <i id="mobile-menu-btn" class="fas fa-ellipsis-v text-xl text-dark hover:text-primary transition-colors cursor-pointer"></i>
+            <i id="mobile-search-btn" class="fas fa-search text-xl text-dark hover:text-secondary transition-colors cursor-pointer"></i>
+            <i id="mobile-menu-btn" class="fas fa-ellipsis-v text-xl text-dark hover:text-secondary transition-colors cursor-pointer"></i>
         </div>
     </header>
     
-    <div id="mobile-search-bar" class="fixed top-16 left-0 right-0 z-40 bg-white p-4 hidden md:hidden">
+    <div id="mobile-search-bar" class="fixed top-16 left-0 right-0 z-40 bg-light p-4 hidden md:hidden">
         <div class="relative">
             <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-            <input type="text" placeholder="Search for products" class="w-full pl-12 pr-4 py-3 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300">
+            <input type="text" placeholder="Search for products" class="w-full pl-12 pr-4 py-3 rounded-full bg-background focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-300">
         </div>
     </div>
 
     <div id="mobile-menu" class="popup-menu md:hidden">
         <div class="flex flex-col space-y-4 text-center">
-            <a href="#" class="font-medium text-lg text-dark hover:text-primary transition-colors">Shop All</a>
-            <a href="#" class="font-medium text-lg text-dark hover:text-primary transition-colors">About Us</a>
-            <a href="#" class="font-medium text-lg text-dark hover:text-primary transition-colors">Contact</a>
-            <a href="#" class="font-medium text-lg text-dark hover:text-primary transition-colors">FAQ</a>
+            <a href="#" class="font-medium text-lg text-dark hover:text-secondary transition-colors">Shop All</a>
+            <a href="#" class="font-medium text-lg text-dark hover:text-secondary transition-colors">About Us</a>
+            <a href="#" class="font-medium text-lg text-dark hover:text-secondary transition-colors">Contact</a>
+            <a href="#" class="font-medium text-lg text-dark hover:text-secondary transition-colors">FAQ</a>
             <hr class="border-gray-200 my-2">
             <div class="flex justify-center space-x-6">
-                <a href="#" class="text-dark hover:text-primary transition-colors"><i class="fab fa-facebook-f text-2xl"></i></a>
-                <a href="#" class="text-dark hover:text-primary transition-colors"><i class="fab fa-instagram text-2xl"></i></a>
-                <a href="#" class="text-dark hover:text-primary transition-colors"><i class="fab fa-twitter text-2xl"></i></a>
+                <a href="#" class="text-dark hover:text-secondary transition-colors"><i class="fab fa-facebook-f text-2xl"></i></a>
+                <a href="#" class="text-dark hover:text-secondary transition-colors"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" class="text-dark hover:text-secondary transition-colors"><i class="fab fa-twitter text-2xl"></i></a>
             </div>
         </div>
     </div>
@@ -298,12 +306,12 @@
         <div id="homeView" class="w-full flex-1 flex flex-col fade-in">
             <main class="page-content overflow-y-auto p-4">
                 <div class="relative w-full rounded-2xl overflow-hidden shadow-lg mb-6">
-                    <img src="https://placehold.co/1200x400/d4a373/ffffff?text=Summer+Sale" alt="Summer Sale: Up to 50% Off" class="w-full h-auto object-cover">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
-                        <h2 class="text-white text-3xl md:text-5xl font-bold leading-tight drop-shadow-lg">
+                    <img src="https://placehold.co/1200x400/1A2E5C/F5F5F5?text=Summer+Sale" alt="Summer Sale: Up to 50% Off" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-dark bg-opacity-40 flex flex-col justify-end p-6">
+                        <h2 class="text-light text-3xl md:text-5xl font-bold leading-tight drop-shadow-lg">
                             Summer Sale: <br> Up to 50% Off
                         </h2>
-                        <a href="#" class="mt-2 text-white text-sm font-semibold hover:underline">Shop Now <i class="fas fa-arrow-right ml-1"></i></a>
+                        <a href="#" class="mt-2 text-light text-sm font-semibold hover:underline">Shop Now <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
@@ -312,28 +320,28 @@
                     
                     <div class="category-list">
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/B0C4DE/000000?text=Glasses" alt="Prescription Glasses" class="category-card-img">
+                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Glasses" alt="Prescription Glasses" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Prescription Glasses</h4>
                                 <p class="text-gray-500 text-sm">Customized vision correction</p>
                             </div>
                         </a>
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/E6CCB2/7F5539?text=Lenses" alt="Lenses Only" class="category-card-img">
+                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Lenses" alt="Lenses Only" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Lenses Only</h4>
                                 <p class="text-gray-500 text-sm">Upgrade your existing frames</p>
                             </div>
                         </a>
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/8D99AE/ffffff?text=Contacts" alt="Contact Lenses" class="category-card-img">
+                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Contacts" alt="Contact Lenses" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Contact Lenses</h4>
                                 <p class="text-gray-500 text-sm">Daily, weekly, and monthly options</p>
                             </div>
                         </a>
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/B79469/333333?text=Sunglasses" alt="Sunglasses/Frames" class="category-card-img">
+                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Sunglasses" alt="Sunglasses/Frames" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Sunglasses/Without Power Frames</h4>
                                 <p class="text-gray-500 text-sm">Stylish protection from the sun</p>
@@ -350,7 +358,7 @@
             </main>
         </div>
 
-        <div id="cartView" class="hidden w-full flex-1 flex flex-col p-6 bg-gray-50 fade-in">
+        <div id="cartView" class="hidden w-full flex-1 flex flex-col p-6 bg-background fade-in">
             <div class="w-full flex justify-start items-center mb-6">
                 <i class="fas fa-arrow-left text-xl cursor-pointer hover:text-primary transition-colors" onclick="showView('home', document.querySelector('.nav-item[data-view=\'home\']'))"></i>
                 <h1 class="flex-1 text-center text-xl font-bold text-dark">Your Cart</h1>
@@ -358,18 +366,18 @@
             <div id="cart-items-container" class="flex-1 overflow-y-auto space-y-4">
                 <div class="text-center text-gray-500 mt-8">Your cart is empty.</div>
             </div>
-            <div class="w-full mt-6 p-4 bg-white rounded-xl shadow-md">
+            <div class="w-full mt-6 p-4 bg-light rounded-xl shadow-md">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-lg font-semibold">Total:</span>
                     <span id="cart-total" class="text-xl font-bold text-primary">₹0.00</span>
                 </div>
-                <button id="checkoutButton" class="w-full py-3 px-4 bg-primary text-white font-bold rounded-xl mt-4 shadow-md transition-transform hover:scale-[1.02]">
+                <button id="checkoutButton" class="w-full py-3 px-4 bg-cta text-light font-bold rounded-xl mt-4 shadow-md transition-transform hover:scale-[1.02]">
                     Checkout
                 </button>
             </div>
         </div>
 
-        <div id="wishlistView" class="hidden w-full flex-1 flex flex-col p-6 bg-gray-50 fade-in">
+        <div id="wishlistView" class="hidden w-full flex-1 flex flex-col p-6 bg-background fade-in">
             <div class="w-full flex justify-start items-center mb-6">
                 <i class="fas fa-arrow-left text-xl cursor-pointer hover:text-primary transition-colors" onclick="showView('home', document.querySelector('.nav-item[data-view=\'home\']'))"></i>
                 <h1 class="flex-1 text-center text-xl font-bold text-dark">Your Wishlist</h1>
@@ -381,23 +389,24 @@
         
     </div>
     
-    <nav class="bottom-nav md:hidden bg-white p-2 shadow-inner-2xl flex justify-around items-center border-t border-gray-200">
+    <nav class="bottom-nav md:hidden bg-light p-2 shadow-inner-2xl flex justify-around items-center border-t border-gray-200">
         <a href="#" class="nav-item active flex flex-col items-center p-2 text-primary transition-colors duration-300" data-view="home" onclick="showView('home', this)">
             <i class="fas fa-home nav-icon"></i>
             <span class="nav-label">Home</span>
         </a>
-        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" data-view="wishlist" onclick="showView('wishlist', this)">
+        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-secondary transition-colors duration-300" data-view="wishlist" onclick="showView('wishlist', this)">
             <i class="fas fa-heart nav-icon"></i>
             <span class="nav-label">Wishlist</span>
         </a>
-        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" id="category-nav-btn">
-            <i class="fas fa-th-large nav-icon"></i> <span class="nav-label">Category</span>
+        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-secondary transition-colors duration-300" id="category-nav-btn" onclick="toggleCategoryPopup(this)">
+            <i class="fas fa-th-large nav-icon"></i>
+            <span class="nav-label">Category</span>
         </a>
-        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" data-view="cart" onclick="showView('cart', this)">
+        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-secondary transition-colors duration-300" data-view="cart" onclick="showView('cart', this)">
             <i class="fas fa-shopping-cart nav-icon"></i>
             <span class="nav-label">Cart</span>
         </a>
-        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" data-view="orders">
+        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-secondary transition-colors duration-300" data-view="orders" onclick="showView('orders', this)">
             <i class="fas fa-box nav-icon"></i>
             <span class="nav-label">My Orders</span>
         </a>
@@ -406,49 +415,49 @@
     <div id="category-popup" class="category-popup md:hidden">
         <div class="flex justify-between items-center mb-6">
             <h4 class="text-xl font-bold">Categories</h4>
-            <i class="fas fa-times text-gray-500 hover:text-dark cursor-pointer" id="close-category-popup-btn"></i>
+            <i class="fas fa-times text-gray-500 hover:text-dark transition-colors cursor-pointer" id="close-category-popup-btn"></i>
         </div>
         <div class="grid grid-cols-2 gap-4 text-center">
-            <a href="#" class="bg-gray-100 py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
+            <a href="#" class="bg-background py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
                 <i class="fas fa-male text-3xl text-dark"></i>
                 <p class="mt-2 font-semibold">Men</p>
             </a>
-            <a href="#" class="bg-gray-100 py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
+            <a href="#" class="bg-background py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
                 <i class="fas fa-female text-3xl text-dark"></i>
                 <p class="mt-2 font-semibold">Women</p>
             </a>
-            <a href="#" class="bg-gray-100 py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
+            <a href="#" class="bg-background py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
                 <i class="fas fa-child text-3xl text-dark"></i>
                 <p class="mt-2 font-semibold">Boy</p>
             </a>
-            <a href="#" class="bg-gray-100 py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
+            <a href="#" class="bg-background py-4 px-2 rounded-xl hover:bg-gray-200 transition-colors">
                 <i class="fas fa-baby text-3xl text-dark"></i>
                 <p class="mt-2 font-semibold">Girl</p>
             </a>
         </div>
     </div>
     
-    <footer class="hidden md:block bg-dark text-white py-8">
+    <footer class="hidden md:block bg-primary text-light py-8">
         <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <h4 class="text-xl font-bold text-primary mb-4">Stylfy Optics</h4>
+                <h4 class="text-xl font-bold text-secondary mb-4">Stylfy Optics</h4>
                 <p class="text-gray-400 text-sm">Your premier destination for stylish and high-quality eyewear. We offer prescription glasses, sunglasses, and contact lenses to suit your unique style.</p>
             </div>
             <div>
                 <h4 class="text-xl font-bold mb-4">Quick Links</h4>
                 <ul class="space-y-2 text-gray-400">
-                    <li><a href="#" class="hover:text-primary transition-colors">Shop All</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">FAQ</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">Shop All</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">Contact</a></li>
+                    <li><a href="#" class="hover:text-secondary transition-colors">FAQ</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-xl font-bold mb-4">Follow Us</h4>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
                 </div>
             </div>
         </div>
@@ -459,6 +468,7 @@
             home: document.getElementById('homeView'),
             cart: document.getElementById('cartView'),
             wishlist: document.getElementById('wishlistView'),
+            // 'ordersView' is not currently in the HTML, so we don't include it here
         };
 
         const navItems = document.querySelectorAll('.nav-item');
@@ -478,12 +488,12 @@
 
         // Dummy product data
         const products = [
-            { id: 1, name: "Aviator Classic", price: 1500, image: "https://placehold.co/200x200/B0C4DE/000000?text=Aviator" },
-            { id: 2, name: "Round Vintage", price: 1200, image: "https://placehold.co/200x200/E6CCB2/7F5539?text=Vintage" },
-            { id: 3, name: "Wayfarer Modern", price: 1800, image: "https://placehold.co/200x200/8D99AE/ffffff?text=Wayfarer" },
-            { id: 4, name: "Cat Eye Chic", price: 1650, image: "https://placehold.co/200x200/B79469/333333?text=Cat+Eye" },
-            { id: 5, name: "Square Classic", price: 1400, image: "https://placehold.co/200x200/d4a373/ffffff?text=Square" },
-            { id: 6, name: "Geometric Gold", price: 2100, image: "https://placehold.co/200x200/7F5539/E6CCB2?text=Geometric" },
+            { id: 1, name: "Aviator Classic", price: 1500, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Aviator" },
+            { id: 2, name: "Round Vintage", price: 1200, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Vintage" },
+            { id: 3, name: "Wayfarer Modern", price: 1800, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Wayfarer" },
+            { id: 4, name: "Cat Eye Chic", price: 1650, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Cat+Eye" },
+            { id: 5, name: "Square Classic", price: 1400, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Square" },
+            { id: 6, name: "Geometric Gold", price: 2100, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Geometric" },
         ];
         
         let cart = [];
@@ -501,29 +511,19 @@
             featuredProductsContainer.innerHTML = '';
             products.forEach(product => {
                 const card = document.createElement('div');
-                card.className = "product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer relative";
+                card.className = "product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative";
                 
-                const isInWishlist = wishlist.some(item => item.id === product.id);
-                const wishlistClass = isInWishlist ? 'in-wishlist' : '';
-
                 card.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover">
-                    <button class="wishlist-btn-card bg-white bg-opacity-80 text-gray-500 rounded-full p-2 text-xs hover:text-red-500 transition-colors ${wishlistClass}" data-product-id="${product.id}">
-                        <i class="fas fa-heart"></i>
-                    </button>
                     <div class="p-3 flex justify-between items-center">
                         <div>
                             <h4 class="font-semibold text-sm truncate">${product.name}</h4>
                             <p class="text-primary font-bold mt-1">₹${product.price.toLocaleString()}</p>
                         </div>
-                        <button class="add-to-cart-btn bg-primary text-white rounded-full p-2 text-xs hover:bg-dark transition-colors" data-product-id="${product.id}">
-                            <i class="fas fa-plus"></i>
-                        </button>
                     </div>
                 `;
                 featuredProductsContainer.appendChild(card);
             });
-            attachProductListeners();
         }
 
         function renderCart() {
@@ -538,7 +538,7 @@
             cart.forEach(item => {
                 total += item.price * item.quantity;
                 const cartItemDiv = document.createElement('div');
-                cartItemDiv.className = "cart-item flex items-center p-4 bg-white rounded-xl shadow-sm";
+                cartItemDiv.className = "cart-item flex items-center p-4 bg-light rounded-xl shadow-sm";
                 cartItemDiv.innerHTML = `
                     <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
                     <div class="flex-1 ml-4">
@@ -546,7 +546,7 @@
                         <p class="text-gray-500 text-sm">₹${item.price.toLocaleString()}</p>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <button class="cart-remove-btn text-red-500 hover:text-red-700" data-product-id="${item.id}">
+                        <button class="cart-remove-btn text-red-500 hover:text-red-700 transition-colors" data-product-id="${item.id}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
@@ -566,7 +566,7 @@
 
             wishlist.forEach(item => {
                 const wishlistItemDiv = document.createElement('div');
-                wishlistItemDiv.className = "wishlist-item flex items-center p-4 bg-white rounded-xl shadow-sm";
+                wishlistItemDiv.className = "wishlist-item flex items-center p-4 bg-light rounded-xl shadow-sm";
                 wishlistItemDiv.innerHTML = `
                     <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
                     <div class="flex-1 ml-4">
@@ -574,10 +574,10 @@
                         <p class="text-gray-500 text-sm">₹${item.price.toLocaleString()}</p>
                     </div>
                     <div class="flex items-center space-x-3">
-                        <button class="add-to-cart-btn-wishlist bg-primary text-white rounded-full p-2 text-xs hover:bg-dark transition-colors" data-product-id="${item.id}">
+                        <button class="add-to-cart-btn-wishlist bg-cta text-light rounded-full p-2 text-xs hover:bg-orange-600 transition-colors" data-product-id="${item.id}">
                             <i class="fas fa-plus"></i>
                         </button>
-                        <button class="wishlist-remove-btn text-red-500 hover:text-red-700" data-product-id="${item.id}">
+                        <button class="wishlist-remove-btn text-red-500 hover:text-red-700 transition-colors" data-product-id="${item.id}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
@@ -623,21 +623,6 @@
             renderWishlist();
         }
 
-        function attachProductListeners() {
-            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = e.currentTarget.dataset.productId;
-                    addToCart(productId);
-                });
-            });
-            document.querySelectorAll('.wishlist-btn-card').forEach(button => {
-                button.addEventListener('click', (e) => {
-                    const productId = e.currentTarget.dataset.productId;
-                    toggleWishlist(productId);
-                });
-            });
-        }
-
         function attachRemoveFromCartListeners() {
             document.querySelectorAll('.cart-remove-btn').forEach(button => {
                 button.addEventListener('click', (e) => {
@@ -669,16 +654,21 @@
         }
 
         function showView(viewName, clickedNav = null) {
+            // Hide all views
             Object.values(views).forEach(view => {
-                view.classList.add('hidden');
-                view.classList.remove('fade-in');
+                if (view) {
+                    view.classList.add('hidden');
+                    view.classList.remove('fade-in');
+                }
             });
+            // Show the selected view
             const selectedView = views[viewName];
             if (selectedView) {
                 selectedView.classList.remove('hidden');
                 selectedView.classList.add('fade-in');
             }
 
+            // Update active navigation item
             navItems.forEach(item => {
                 item.classList.remove('active', 'text-primary');
                 item.classList.add('text-gray-500');
@@ -687,37 +677,96 @@
                 clickedNav.classList.add('active', 'text-primary');
                 clickedNav.classList.remove('text-gray-500');
             }
+            // Hide all popups when a new view is shown
+            hideAllPopups();
         }
 
-        // Mobile Search Bar Toggle
-        mobileSearchBtn.addEventListener('click', () => {
-            mobileSearchBar.classList.toggle('hidden');
-            mobileMenu.classList.remove('active'); // Hide menu if search is opened
-        });
-
-        // Mobile Menu Popup Toggle
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('active');
-            mobileSearchBar.classList.add('hidden'); // Hide search if menu is opened
-        });
-
-        // Mobile Category Popup Toggle
-        categoryNavBtn.addEventListener('click', (event) => {
-            event.preventDefault();
-            categoryPopup.classList.toggle('active');
-            navItems.forEach(item => item.classList.remove('active', 'text-primary'));
-            navItems.forEach(item => item.classList.add('text-gray-500'));
-            categoryNavBtn.classList.add('active', 'text-primary');
-            categoryNavBtn.classList.remove('text-gray-500');
-        });
-        closeCategoryPopupBtn.addEventListener('click', () => {
+        function hideAllPopups() {
+            mobileSearchBar.classList.add('hidden');
+            mobileMenu.classList.remove('active');
             categoryPopup.classList.remove('active');
-            categoryNavBtn.classList.remove('active', 'text-primary');
-            categoryNavBtn.classList.add('text-gray-500');
+            // Reset category nav button state if popup is closed
+            if (categoryNavBtn) {
+                categoryNavBtn.classList.remove('active', 'text-primary');
+                categoryNavBtn.classList.add('text-gray-500');
+            }
+        }
+        
+        document.body.addEventListener('click', (e) => {
+            const isClickInsidePopup = 
+                (mobileSearchBar && mobileSearchBar.contains(e.target)) || 
+                (mobileMenu && mobileMenu.contains(e.target)) || 
+                (categoryPopup && categoryPopup.contains(e.target));
+            
+            const isButtonClick = 
+                (mobileSearchBtn && mobileSearchBtn.contains(e.target)) ||
+                (mobileMenuBtn && mobileMenuBtn.contains(e.target)) ||
+                (categoryNavBtn && categoryNavBtn.contains(e.target)) ||
+                (closeCategoryPopupBtn && closeCategoryPopupBtn.contains(e.target));
+
+            if (!isClickInsidePopup && !isButtonClick) {
+                hideAllPopups();
+            }
         });
+        
+        // Event listener for mobile search button
+        if (mobileSearchBtn) {
+            mobileSearchBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileSearchBar.classList.toggle('hidden');
+                mobileMenu.classList.remove('active');
+                categoryPopup.classList.remove('active');
+            });
+        }
+
+        // Event listener for mobile menu button
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                mobileMenu.classList.toggle('active');
+                mobileSearchBar.classList.add('hidden');
+                categoryPopup.classList.remove('active');
+            });
+        }
+
+        // Event listener for mobile category button
+        if (categoryNavBtn) {
+            categoryNavBtn.addEventListener('click', (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                categoryPopup.classList.toggle('active');
+
+                navItems.forEach(item => {
+                    if (item !== categoryNavBtn) {
+                        item.classList.remove('active', 'text-primary');
+                        item.classList.add('text-gray-500');
+                    }
+                });
+                if (categoryPopup.classList.contains('active')) {
+                    categoryNavBtn.classList.add('active', 'text-primary');
+                    categoryNavBtn.classList.remove('text-gray-500');
+                } else {
+                    categoryNavBtn.classList.remove('active', 'text-primary');
+                    categoryNavBtn.classList.add('text-gray-500');
+                }
+            });
+        }
+        
+        // Event listener to close category popup
+        if (closeCategoryPopupBtn) {
+            closeCategoryPopupBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                categoryPopup.classList.remove('active');
+                categoryNavBtn.classList.remove('active', 'text-primary');
+                categoryNavBtn.classList.add('text-gray-500');
+            });
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
-            showView('home', document.querySelector('.nav-item[data-view=\'home\']'));
+            const homeNavItem = document.querySelector('.nav-item[data-view="home"]');
+            if (homeNavItem) {
+                showView('home', homeNavItem);
+            }
             renderProducts();
             renderCart();
             renderWishlist();
