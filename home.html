@@ -152,36 +152,42 @@
             visibility: visible;
         }
         
-        /* --- Responsive Category Styles --- */
-        /* Mobile: Circles, scrollable row */
-        .category-item {
+        /* --- Consistent Category Styles for All Devices --- */
+        .category-list {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            min-width: 80px;
+            gap: 1rem;
         }
-        .category-icon-container {
-            width: 80px;
-            height: 80px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: rgba(212, 163, 115, 0.2);
-            border-radius: 50%;
-            transition: border-radius 0.3s ease-in-out;
-        }
-        
-        /* Desktop: Squares, auto layout */
+
         @media (min-width: 768px) {
             .category-list {
-                display: grid;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 1rem;
-            }
-            .category-icon-container {
-                border-radius: 12px;
+                flex-direction: row;
+                overflow-x: auto;
+                flex-wrap: nowrap;
             }
         }
+
+        .category-card {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+            min-width: 280px; /* Ensures card has a minimum size on desktop */
+        }
+        .category-card:hover {
+            transform: translateX(5px);
+        }
+        .category-card-img {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
     </style>
 </head>
 <body class="bg-secondary">
@@ -234,30 +240,35 @@
 
                 <section class="mb-8">
                     <h3 class="text-2xl font-bold mb-4 text-dark">Shop by Category</h3>
-                    <div class="flex md:grid md:grid-cols-4 md:gap-4 overflow-x-auto gap-4 py-2">
-                        <a href="#" class="category-item">
-                            <div class="category-icon-container">
-                                <i class="fas fa-glasses text-2xl text-primary"></i>
+                    
+                    <div class="category-list">
+                        <a href="#" class="category-card">
+                            <img src="https://placehold.co/80x60/B0C4DE/000000?text=Glasses" alt="Prescription Glasses" class="category-card-img">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-lg">Prescription Glasses</h4>
+                                <p class="text-gray-500 text-sm">Customized vision correction</p>
                             </div>
-                            <span class="mt-2 text-sm font-medium text-center">Eyeglasses</span>
                         </a>
-                        <a href="#" class="category-item">
-                            <div class="category-icon-container">
-                                <i class="fas fa-sun text-2xl text-primary"></i>
+                        <a href="#" class="category-card">
+                            <img src="https://placehold.co/80x60/E6CCB2/7F5539?text=Lenses" alt="Lenses Only" class="category-card-img">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-lg">Lenses Only</h4>
+                                <p class="text-gray-500 text-sm">Upgrade your existing frames</p>
                             </div>
-                            <span class="mt-2 text-sm font-medium text-center">Sunglasses</span>
                         </a>
-                        <a href="#" class="category-item">
-                            <div class="category-icon-container">
-                                <i class="fas fa-eye text-2xl text-primary"></i>
+                        <a href="#" class="category-card">
+                            <img src="https://placehold.co/80x60/8D99AE/ffffff?text=Contacts" alt="Contact Lenses" class="category-card-img">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-lg">Contact Lenses</h4>
+                                <p class="text-gray-500 text-sm">Daily, weekly, and monthly options</p>
                             </div>
-                            <span class="mt-2 text-sm font-medium text-center">Contact Lenses</span>
                         </a>
-                        <a href="#" class="category-item">
-                            <div class="category-icon-container">
-                                <i class="fas fa-microscope text-2xl text-primary"></i>
+                        <a href="#" class="category-card">
+                            <img src="https://placehold.co/80x60/B79469/333333?text=Sunglasses" alt="Sunglasses/Frames" class="category-card-img">
+                            <div class="flex-1">
+                                <h4 class="font-semibold text-lg">Sunglasses/Without Power Frames</h4>
+                                <p class="text-gray-500 text-sm">Stylish protection from the sun</p>
                             </div>
-                            <span class="mt-2 text-sm font-medium text-center">Eye Exam</span>
                         </a>
                     </div>
                 </section>
@@ -304,6 +315,10 @@
         <a href="#" class="nav-item active flex flex-col items-center p-2 text-primary transition-colors duration-300" data-view="home" onclick="showView('home', this)">
             <i class="fas fa-home nav-icon"></i>
             <span class="nav-label">Home</span>
+        </a>
+        <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" data-view="wishlist" onclick="showView('wishlist', this)">
+            <i class="fas fa-heart nav-icon"></i>
+            <span class="nav-label">Wishlist</span>
         </a>
         <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" data-view="orders">
             <i class="fas fa-box nav-icon"></i>
