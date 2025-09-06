@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylfy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800;900&display=swap');
+        
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: rgb(247 233 227); /* Background color from the UI image */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-container {
+            position: relative;
+            width: 95%; /* Make it responsive */
+            max-width: 450px; /* Set a max-width for desktop view */
+            height: 95vh;
+            max-height: 800px;
+            background-color: rgb(233 149 113); /* Main card color */
+            overflow: hidden;
+            border-radius: 40px; /* Rounded corners for the card-like UI */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: grid;
+            grid-template-areas: "text" "image";
+            grid-template-rows: 1fr auto;
+            align-items: end;
+            justify-content: center;
+        }
+
+        #bg-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .person-image {
+            grid-area: image;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 5;
+    object-fit: cover;
+    object-position: bottom;
+    height: 70vh;
+    margin-left: 95px;
+        }
+
+        .content-overlay {
+            grid-area: text;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+        }
+
+        .text-overlay {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            line-height: 1.1;
+            font-weight: 700; /* Heavier font weight */
+            color: #ffffff;
+            margin-top: 1rem;
+            mix-blend-mode: difference;
+            /* margin-left: -52px; */
+        }
+        
+        .label-text {
+            font-size: clamp(3rem, 15vw, 8rem);
+            line-height: 1;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.7);
+            transform: rotate(-90deg);
+            transform-origin: 0 0;
+            position: absolute;
+            left: -10vw;
+            bottom: 20%;
+            z-index: 10;
+        }
+
+        .nav-button-container {
+            position: absolute;
+            bottom: 3rem;
+            left: 2rem;
+            z-index: 20;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background-color: #000;
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-button::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .nav-button:hover::before {
+            animation: none;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(1.2);
+                opacity: 0;
+            }
+        }
+
+        .arrow {
+            width: 30px;
+            height: 30px;
+        }
+        
+        /* Media Queries for better responsiveness */
+        @media (max-width: 480px) {
+            .main-container {
+                border-radius: 0; /* No rounded corners on small screens */
+                width: 100%;
+                height: 100vh;
+            }
+            .content-overlay {
+                padding: 1.5rem;
+            }
+            .text-overlay {
+                        font-size: clamp(3.2rem, 69vw, 4rem);
+            }
+            .label-text {
+                font-size: clamp(2rem, 10vw, 5rem);
+                left: -15vw; /* Adjust for better fit */
+            }
+            .nav-button-container {
+                bottom: 2rem;
+                left: 1.5rem;
+            }
+            .nav-button {
+                width: 60px;
+                height: 60px;
+            }
+            .arrow {
+                width: 25px;
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#f7e9e3]">
+
+<div class="main-container relative">
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="content-overlay">
+        <div class="text-overlay">
+            Eyewear for everyone & every need
+        </div>
+    </div>
+    
+    <div class="label-text">
+        la
+    </div>
+    <img src="https://www.eyesmilebelmont.com/assets/images/banner-13.png" alt="A smiling woman wearing glasses" class="person-image">
+
+    <div class="nav-button-container">
+        <a href="home.html" class="nav-button">
+            <svg xmlns="http://www.w3.org/2000/svg" class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+        </a>
+    </div>
+</div>
+
+<script>
+    window.onload = function() {
+        const canvas = document.getElementById('bg-canvas');
+        const scene = new THREE.Scene();
+        const container = document.querySelector('.main-container');
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+        renderer.setClearColor(0x000000, 0);
+
+        const setCanvasSize = () => {
+            const width = container.offsetWidth;
+            const height = container.offsetHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        };
+
+        setCanvasSize();
+        window.addEventListener('resize', setCanvasSize);
+        // Also call on orientation change for mobile devices
+        window.addEventListener('orientationchange', setCanvasSize);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        const pointLight = new THREE.PointLight(0xd4a373, 1.5);
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+
+        const stylfyGroup = new THREE.Group();
+        const numShapes = 20;
+
+        for (let i = 0; i < numShapes; i++) {
+            const geometry = new THREE.TorusKnotGeometry(1, 0.4, 100, 16);
+            const material = new THREE.MeshPhysicalMaterial({
+                color: new THREE.Color(`hsl(${i * (360 / numShapes)}, 70%, 70%)`),
+                roughness: 0.1,
+                metalness: 0.9,
+                clearcoat: 1,
+                clearcoatRoughness: 0.2,
+                transparent: true,
+                opacity: 0.6
+            });
+            const mesh = new THREE.Mesh(geometry, material);
+            mesh.position.set(
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10,
+                (Math.random() - 0.5) * 10
+            );
+            mesh.rotation.set(
+                Math.random() * Math.PI,
+                Math.random() * Math.PI,
+                Math.random() * Math.PI
+            );
+            mesh.scale.setScalar(0.2 + Math.random() * 0.5);
+            stylfyGroup.add(mesh);
+        }
+        scene.add(stylfyGroup);
+
+        camera.position.z = 5;
+
+        const animate = () => {
+            requestAnimationFrame(animate);
+            stylfyGroup.rotation.y += 0.005;
+            renderer.render(scene, camera);
+        };
+        animate();
+    };
+</script>
+
+</body>
+</html>
