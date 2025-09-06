@@ -187,7 +187,6 @@
             object-fit: cover;
             margin-right: 1rem;
         }
-        
     </style>
 </head>
 <body class="bg-secondary">
@@ -558,8 +557,8 @@
                 button.addEventListener('click', (e) => {
                     const productId = e.currentTarget.dataset.productId;
                     addToCart(productId);
-                    // Optionally remove from wishlist after adding to cart
-                    // removeFromWishlist(productId);
+                    // Remove the item from the wishlist after adding to cart
+                    removeFromWishlist(productId);
                 });
             });
         }
