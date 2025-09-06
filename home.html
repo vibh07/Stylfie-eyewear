@@ -3,38 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stylfy Optics</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Stylfy Optics - Your Vision, Your Style</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f7e9e3;
-            color: #333;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        /* Custom Color Palette */
+        :root {
+            --primary-color: #d4a373;
+            --secondary-color: #f7e9e3;
+            --dark-color: #333;
+            --light-color: #fff;
+            --accent-color: #8d99ae;
         }
 
-        .main-container {
-            max-width: 450px;
-            margin: auto;
-            background-color: #fff;
+        .bg-primary { background-color: var(--primary-color); }
+        .text-primary { color: var(--primary-color); }
+        .bg-secondary { background-color: var(--secondary-color); }
+        .bg-dark { background-color: var(--dark-color); }
+        .text-dark { color: var(--dark-color); }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--secondary-color);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            color: var(--dark-color);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        @media (min-width: 640px) {
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Responsive Container */
+        .main-container {
+            width: 100%;
+            margin: 0;
+            background-color: var(--light-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: none;
+            flex-grow: 1; /* This is new */
+        }
+
+        @media (min-width: 768px) {
             .main-container {
-                border-radius: 20px;
-                margin-top: 20px;
-                margin-bottom: 20px;
-                min-height: calc(100vh - 40px);
+                max-width: 100%; /* Ensure it takes full width */
+                border-radius: 0; /* Remove border-radius on desktop */
+                box-shadow: none; /* Remove box-shadow on desktop */
+                min-height: auto;
+                margin: 0;
+                padding-bottom: 80px; /* Add space for the footer */
             }
+        }
+
+        .page-content {
+            flex-grow: 1;
         }
 
         .fade-in {
@@ -42,236 +72,340 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        .nav-icon {
-            font-size: 1.5rem;
+        .nav-icon { font-size: 1.5rem; }
+        .nav-label { font-size: 0.75rem; }
+
+        .product-card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .nav-label {
-            font-size: 0.75rem;
-            line-height: 1rem;
+        .cart-item {
+            border-bottom: 1px solid #e5e7eb;
         }
-        
-        .profile-image {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #fff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        .cart-item:last-child {
+            border-bottom: none;
         }
 
-        .profile-option {
-            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        /* New desktop navigation and footer styles */
+        .desktop-header {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
         }
-        .profile-option:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        .full-width-container {
+            width: 100%;
+            background-color: white;
         }
     </style>
 </head>
-<body class="bg-[#f7e9e3]">
+<body class="bg-secondary">
     <div class="main-container">
-        <!-- Home Page View -->
+
         <div id="homeView" class="w-full flex-1 flex flex-col fade-in">
-            <!-- Header -->
-            <header class="bg-white p-4 shadow-sm flex justify-between items-center rounded-t-[20px] md:rounded-t-none">
-                <h1 class="text-2xl font-bold">Stylfy Optics</h1>
-                <i class="fas fa-bars text-xl cursor-pointer"></i>
-            </header>
+            <div class="full-width-container">
+                <header class="bg-white p-4 shadow-sm flex justify-between items-center rounded-t-[20px] md:rounded-t-none desktop-header">
+                    <h1 class="text-3xl font-bold text-primary">Stylfy</h1>
+                    <div class="hidden md:flex flex-1 justify-center items-center space-x-8">
+                        <a href="#" class="font-medium text-dark hover:text-primary transition-colors">Eyeglasses</a>
+                        <a href="#" class="font-medium text-dark hover:text-primary transition-colors">Sunglasses</a>
+                        <a href="#" class="font-medium text-dark hover:text-primary transition-colors">Contact Lenses</a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button id="search-btn" class="text-xl text-dark hover:text-primary transition-colors">
+                            <i class="fas fa-search"></i>
+                        </button>
+                        <a href="#" class="text-xl text-dark hover:text-primary transition-colors" data-view="cart" onclick="showView('cart', this)">
+                            <i class="fas fa-shopping-cart"></i>
+                        </a>
+                        <button id="menu-btn" class="md:hidden text-xl text-dark hover:text-primary transition-colors">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                </header>
+            </div>
 
-            <!-- Main Content -->
-            <main class="flex-1 overflow-y-auto p-4">
-                <!-- Sale Banner -->
+            <main class="page-content overflow-y-auto p-4">
                 <div class="relative w-full rounded-2xl overflow-hidden shadow-lg mb-6">
-                    <img src="https://placehold.co/400x200/d4a373/ffffff?text=Summer+Sale" alt="Summer Sale: Up to 50% Off" class="w-full h-auto">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end p-4">
-                        <h2 class="text-white text-3xl font-bold leading-tight">Summer Sale: Up to 50% Off</h2>
+                    <img src="https://placehold.co/1200x400/d4a373/ffffff?text=Summer+Sale" alt="Summer Sale: Up to 50% Off" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-6">
+                        <h2 class="text-white text-3xl md:text-5xl font-bold leading-tight drop-shadow-lg">
+                            Summer Sale: <br> Up to 50% Off
+                        </h2>
+                        <a href="#" class="mt-2 text-white text-sm font-semibold hover:underline">Shop Now <i class="fas fa-arrow-right ml-1"></i></a>
                     </div>
                 </div>
 
-                <!-- Search Bar -->
-                <div class="relative mb-6">
+                <div id="search-bar" class="relative mb-6 hidden">
                     <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
-                    <input type="text" placeholder="Search for products" class="w-full pl-12 pr-4 py-3 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-300 transition-all duration-300">
+                    <input type="text" placeholder="Search for products" class="w-full pl-12 pr-4 py-3 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300">
                 </div>
 
-                <!-- Services Section -->
-                <section>
-                    <h3 class="text-2xl font-bold mb-4">Services</h3>
-                    <div class="space-y-4">
-                        <!-- Service Item -->
-                        <div class="flex items-center bg-gray-50 rounded-2xl p-4 shadow-sm">
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-lg">Prescription Glasses</h4>
-                                <p class="text-gray-500 text-sm">Customized vision correction</p>
+                <section class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-dark">Shop by Category</h3>
+                    <div class="flex flex-wrap justify-around gap-4">
+                        <a href="#" class="flex flex-col items-center">
+                            <div class="bg-primary bg-opacity-20 p-4 rounded-full">
+                                <i class="fas fa-glasses text-2xl text-primary"></i>
                             </div>
-                            <img src="https://placehold.co/100x70/E6CCB2/7F5539?text=Glasses" alt="Prescription Glasses" class="rounded-lg w-24 h-auto">
-                        </div>
-                        
-                        <!-- Service Item -->
-                        <div class="flex items-center bg-gray-50 rounded-2xl p-4 shadow-sm">
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-lg">Lenses Only</h4>
-                                <p class="text-gray-500 text-sm">Upgrade your existing frames</p>
+                            <span class="mt-2 text-sm font-medium">Eyeglasses</span>
+                        </a>
+                        <a href="#" class="flex flex-col items-center">
+                            <div class="bg-primary bg-opacity-20 p-4 rounded-full">
+                                <i class="fas fa-sun text-2xl text-primary"></i>
                             </div>
-                            <img src="https://placehold.co/100x70/B0C4DE/000000?text=Lenses" alt="Lenses Only" class="rounded-lg w-24 h-auto">
-                        </div>
-                        
-                        <!-- Service Item -->
-                        <div class="flex items-center bg-gray-50 rounded-2xl p-4 shadow-sm">
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-lg">Contact Lenses</h4>
-                                <p class="text-gray-500 text-sm">Daily, weekly, and monthly options</p>
+                            <span class="mt-2 text-sm font-medium">Sunglasses</span>
+                        </a>
+                        <a href="#" class="flex flex-col items-center">
+                            <div class="bg-primary bg-opacity-20 p-4 rounded-full">
+                                <i class="fas fa-eye text-2xl text-primary"></i>
                             </div>
-                            <img src="https://placehold.co/100x70/8D99AE/ffffff?text=Contacts" alt="Contact Lenses" class="rounded-lg w-24 h-auto">
-                        </div>
-                        
-                        <!-- Service Item -->
-                        <div class="flex items-center bg-gray-50 rounded-2xl p-4 shadow-sm">
-                            <div class="flex-1">
-                                <h4 class="font-semibold text-lg">Sunglasses/Without Power Frames</h4>
-                                <p class="text-gray-500 text-sm">Stylish protection from the sun</p>
+                            <span class="mt-2 text-sm font-medium">Contact Lenses</span>
+                        </a>
+                        <a href="#" class="flex flex-col items-center">
+                            <div class="bg-primary bg-opacity-20 p-4 rounded-full">
+                                <i class="fas fa-microscope text-2xl text-primary"></i>
                             </div>
-                            <img src="https://placehold.co/100x70/B79469/333333?text=Sunglasses" alt="Sunglasses" class="rounded-lg w-24 h-auto">
-                        </div>
+                            <span class="mt-2 text-sm font-medium">Eye Exam</span>
+                        </a>
                     </div>
+                </section>
+
+                <section>
+                    <h3 class="text-2xl font-bold mb-4 text-dark">Featured Frames</h3>
+                    <div id="featured-products-container" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        </div>
                 </section>
             </main>
         </div>
 
-        <!-- Profile Page View -->
-        <div id="profileView" class="hidden w-full flex-1 flex flex-col items-center p-6 bg-gray-50 fade-in">
-            <!-- Header -->
+        <div id="cartView" class="hidden w-full flex-1 flex flex-col p-6 bg-gray-50 fade-in">
             <div class="w-full flex justify-start items-center mb-6">
-                <i class="fas fa-arrow-left text-xl cursor-pointer" onclick="showView('home')"></i>
-                <h1 class="flex-1 text-center text-xl font-bold">My Profile</h1>
+                <i class="fas fa-arrow-left text-xl cursor-pointer hover:text-primary transition-colors" onclick="showView('home', document.querySelector('.nav-item[data-view=\'home\']'))"></i>
+                <h1 class="flex-1 text-center text-xl font-bold text-dark">Your Cart</h1>
             </div>
 
-            <!-- Profile Info -->
-            <div class="flex flex-col items-center my-6">
-                <img id="profileImage" src="https://placehold.co/120x120/d4a373/ffffff?text=Avatar" alt="Profile Avatar" class="profile-image">
-                <h2 id="profileName" class="text-2xl font-bold mt-4"></h2>
-                <p id="profileEmail" class="text-gray-500"></p>
+            <div id="cart-items-container" class="flex-1 overflow-y-auto space-y-4">
+                <div class="text-center text-gray-500 mt-8">Your cart is empty.</div>
             </div>
 
-            <!-- Profile Options -->
-            <div class="w-full max-w-sm space-y-4">
-                <div class="profile-option flex items-center justify-between p-4 bg-white rounded-xl shadow-sm cursor-pointer">
-                    <span class="font-medium text-lg">Edit Personal Information</span>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
+            <div class="w-full mt-6 p-4 bg-white rounded-xl shadow-md">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-lg font-semibold">Total:</span>
+                    <span id="cart-total" class="text-xl font-bold text-primary">₹0.00</span>
                 </div>
-                <div class="profile-option flex items-center justify-between p-4 bg-white rounded-xl shadow-sm cursor-pointer">
-                    <span class="font-medium text-lg">My Orders</span>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                </div>
-                <div class="profile-option flex items-center justify-between p-4 bg-white rounded-xl shadow-sm cursor-pointer">
-                    <span class="font-medium text-lg">Settings</span>
-                    <i class="fas fa-arrow-right text-gray-400"></i>
-                </div>
-                <button id="logoutButton" class="w-full text-center py-3 px-4 bg-red-500 text-white font-bold rounded-xl mt-6 shadow-md transition-transform hover:scale-[1.02]">
-                    Logout
+                <button id="checkoutButton" class="w-full py-3 px-4 bg-primary text-white font-bold rounded-xl mt-4 shadow-md transition-transform hover:scale-[1.02]">
+                    Checkout
                 </button>
             </div>
         </div>
 
-        <!-- Bottom Navigation Bar -->
-        <nav class="bg-white p-2 shadow-inner-2xl flex justify-around items-center rounded-b-[20px] md:rounded-b-none border-t border-gray-200">
-            <a href="#" class="flex flex-col items-center p-2 text-gray-500 hover:text-orange-500 transition-colors duration-300" onclick="showView('home', this)">
+        <nav class="md:hidden bg-white p-2 shadow-inner-2xl flex justify-around items-center rounded-b-[20px] md:rounded-b-none border-t border-gray-200">
+            <a href="#" class="nav-item active flex flex-col items-center p-2 text-primary transition-colors duration-300" data-view="home" onclick="showView('home', this)">
                 <i class="fas fa-home nav-icon"></i>
                 <span class="nav-label">Home</span>
             </a>
-            <a href="#" class="flex flex-col items-center p-2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
+            <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" data-view="orders">
                 <i class="fas fa-box nav-icon"></i>
                 <span class="nav-label">My Orders</span>
             </a>
-            <a href="#" class="flex flex-col items-center p-2 text-gray-500 hover:text-orange-500 transition-colors duration-300" onclick="showView('profile', this)">
-                <i class="fas fa-user nav-icon"></i>
-                <span class="nav-label">My Profile</span>
-            </a>
-            <a href="#" class="flex flex-col items-center p-2 text-gray-500 hover:text-orange-500 transition-colors duration-300">
+            <a href="#" class="nav-item flex flex-col items-center p-2 text-gray-500 hover:text-primary transition-colors duration-300" data-view="cart" onclick="showView('cart', this)">
                 <i class="fas fa-shopping-cart nav-icon"></i>
                 <span class="nav-label">Cart</span>
             </a>
         </nav>
+
     </div>
 
-    <!-- Firebase SDKs for Auth -->
-    <script type="module">
-        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-auth.js";
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+    <footer class="hidden md:block bg-dark text-white py-8">
+        <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h4 class="text-xl font-bold text-primary mb-4">Stylfy Optics</h4>
+                <p class="text-gray-400 text-sm">Your premier destination for stylish and high-quality eyewear. We offer prescription glasses, sunglasses, and contact lenses to suit your unique style.</p>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-gray-400">
+                    <li><a href="#" class="hover:text-primary transition-colors">Shop All</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                    <li><a href="#" class="hover:text-primary transition-colors">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-xl font-bold mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        // IMPORTANT: Use the same firebaseConfig as your login page.
-        // I've kept placeholders here, but you must replace them with your actual config.
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID",
-            measurementId: "YOUR_MEASUREMENT_ID"
+    <script>
+        const views = {
+            home: document.getElementById('homeView'),
+            cart: document.getElementById('cartView'),
         };
-        
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
 
-        // Function to switch between views
-        window.showView = function(viewId, element = null) {
-            const views = ['homeView', 'profileView'];
-            views.forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-                document.getElementById(id).classList.remove('fade-in');
+        const navItems = document.querySelectorAll('.nav-item');
+        const searchBtn = document.getElementById('search-btn');
+        const searchBar = document.getElementById('search-bar');
+        const featuredProductsContainer = document.getElementById('featured-products-container');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartTotalDisplay = document.getElementById('cart-total');
+
+        // Dummy product data
+        const products = [
+            { id: 1, name: "Aviator Classic", price: 1500, image: "https://placehold.co/200x200/B0C4DE/000000?text=Aviator" },
+            { id: 2, name: "Round Vintage", price: 1200, image: "https://placehold.co/200x200/E6CCB2/7F5539?text=Vintage" },
+            { id: 3, name: "Wayfarer Modern", price: 1800, image: "https://placehold.co/200x200/8D99AE/ffffff?text=Wayfarer" },
+            { id: 4, name: "Cat Eye Chic", price: 1650, image: "https://placehold.co/200x200/B79469/333333?text=Cat+Eye" },
+            { id: 5, name: "Square Classic", price: 1400, image: "https://placehold.co/200x200/d4a373/ffffff?text=Square" },
+            { id: 6, name: "Geometric Gold", price: 2100, image: "https://placehold.co/200x200/7F5539/E6CCB2?text=Geometric" },
+        ];
+
+        // Shopping cart state
+        let cart = [];
+
+        // Function to render product cards on the homepage
+        function renderProducts() {
+            featuredProductsContainer.innerHTML = '';
+            products.forEach(product => {
+                const card = document.createElement('div');
+                card.className = "product-card bg-white rounded-xl shadow-md overflow-hidden cursor-pointer";
+                card.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover">
+                    <div class="p-3 flex justify-between items-center">
+                        <div>
+                            <h4 class="font-semibold text-sm truncate">${product.name}</h4>
+                            <p class="text-primary font-bold mt-1">₹${product.price.toLocaleString()}</p>
+                        </div>
+                        <button class="add-to-cart-btn bg-primary text-white rounded-full p-2 text-xs hover:bg-dark transition-colors" data-product-id="${product.id}">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                `;
+                featuredProductsContainer.appendChild(card);
             });
-            document.getElementById(viewId).classList.remove('hidden');
-            document.getElementById(viewId).classList.add('fade-in');
-            
-            // Highlight the active nav icon
-            if (element) {
-                document.querySelectorAll('nav a').forEach(link => link.classList.remove('text-orange-500'));
-                element.classList.add('text-orange-500');
-            }
-        };
+            attachAddToCartListeners();
+        }
 
-        // Initialize the view to 'homeView' on page load and highlight the nav icon.
-        window.onload = function() {
-            showView('homeView', document.querySelector('a[onclick*="home"]'));
-        };
-
-        // Listen for authentication state changes
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                console.log("User is signed in:", user);
-                // Update profile page content
-                document.getElementById('profileName').textContent = user.displayName || 'User';
-                document.getElementById('profileEmail').textContent = user.email || '';
-                // You can set the profile image here if you have one
-                // document.getElementById('profileImage').src = user.photoURL || 'default-avatar.png';
-            } else {
-                console.log("User is signed out.");
-                // Redirect to login page if user logs out or is not authenticated
-                window.location.href = 'index.html'; 
+        // Function to render cart items
+        function renderCart() {
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `<div class="text-center text-gray-500 mt-8">Your cart is empty.</div>`;
+                cartTotalDisplay.textContent = '₹0.00';
+                return;
             }
+
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price * item.quantity;
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = "cart-item flex items-center p-4 bg-white rounded-xl shadow-sm";
+                cartItemDiv.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover">
+                    <div class="flex-1 ml-4">
+                        <h4 class="font-semibold">${item.name}</h4>
+                        <p class="text-gray-500 text-sm">₹${item.price.toLocaleString()}</p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <button class="cart-remove-btn text-red-500 hover:text-red-700" data-product-id="${item.id}">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemDiv);
+            });
+            cartTotalDisplay.textContent = `₹${total.toLocaleString()}`;
+            attachRemoveFromCartListeners();
+        }
+
+        // Add a product to the cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id == productId);
+            if (product) {
+                const existingItem = cart.find(item => item.id == productId);
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                alert(`${product.name} has been added to your cart.`);
+                renderCart();
+            }
+        }
+
+        // Remove a product from the cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id != productId);
+            alert('Item removed from cart.');
+            renderCart();
+        }
+
+        // Attach event listeners for Add to Cart buttons
+        function attachAddToCartListeners() {
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    addToCart(productId);
+                });
+            });
+        }
+
+        // Attach event listeners for Remove from Cart buttons
+        function attachRemoveFromCartListeners() {
+            document.querySelectorAll('.cart-remove-btn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    removeFromCart(productId);
+                });
+            });
+        }
+
+        // Toggle between views
+        function showView(viewName, clickedNav = null) {
+            Object.values(views).forEach(view => {
+                view.classList.add('hidden');
+                view.classList.remove('fade-in');
+            });
+            const selectedView = views[viewName];
+            if (selectedView) {
+                selectedView.classList.remove('hidden');
+                selectedView.classList.add('fade-in');
+            }
+
+            navItems.forEach(item => {
+                item.classList.remove('active', 'text-primary');
+                item.classList.add('text-gray-500');
+            });
+            if (clickedNav) {
+                clickedNav.classList.add('active', 'text-primary');
+                clickedNav.classList.remove('text-gray-500');
+            }
+        }
+
+        // Event Listeners
+        searchBtn.addEventListener('click', () => {
+            searchBar.classList.toggle('hidden');
         });
 
-        // Logout functionality
-        document.getElementById('logoutButton').addEventListener('click', () => {
-            signOut(auth).then(() => {
-                console.log("User signed out successfully.");
-                // The onAuthStateChanged listener will handle the redirection.
-            }).catch((error) => {
-                console.error("Error signing out:", error);
-                // Handle the error (e.g., show a notification)
-            });
+        // Initialize the website on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            showView('home', document.querySelector('.nav-item[data-view=\'home\']'));
+            renderProducts();
+            renderCart(); // Initial cart render to show "Your cart is empty"
         });
-
     </script>
 </body>
 </html>
