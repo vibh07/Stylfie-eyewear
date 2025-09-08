@@ -57,8 +57,8 @@
             flex-direction: column;
             box-shadow: none;
             flex-grow: 1;
-            padding-top: 60px; /* Space for fixed mobile header */
-            padding-bottom: 80px; /* Space for fixed bottom nav bar */
+            padding-top: 60px;
+            padding-bottom: 80px;
         }
 
         @media (min-width: 768px) {
@@ -67,7 +67,7 @@
                 border-radius: 0;
                 box-shadow: none;
                 min-height: auto;
-                padding-top: 80px; /* Adjust padding for larger desktop header */
+                padding-top: 80px;
                 padding-bottom: 0;
             }
         }
@@ -102,14 +102,14 @@
         .cart-item:last-child {
             border-bottom: none;
         }
-
+        
         .fixed-header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 50;
-            background-color: var(--light-color); /* Added solid background color */
+            background-color: var(--light-color);
         }
 
         .bottom-nav {
@@ -118,10 +118,9 @@
             left: 0;
             right: 0;
             z-index: 50;
-            background-color: var(--light-color); /* Added solid background color */
+            background-color: var(--light-color);
         }
 
-        /* Wishlist button on product card */
         .wishlist-btn-card {
             position: absolute;
             top: 10px;
@@ -134,16 +133,15 @@
         }
 
         .wishlist-btn-card.in-wishlist i {
-            color: #ef4444; /* red-500 */
+            color: #ef4444;
         }
 
-        /* --- Stylish Notification Toast --- */
         .toast {
             position: fixed;
             bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: #2ABFAC;
             color: white;
             padding: 12px 24px;
             border-radius: 12px;
@@ -160,7 +158,6 @@
             visibility: visible;
         }
         
-        /* --- Consistent Category Styles for All Devices --- */
         .category-list {
             display: flex;
             flex-direction: column;
@@ -183,7 +180,7 @@
         .category-card {
             display: flex;
             align-items: center;
-            background-color: var(--background-color);
+            background-color: #94dfd5;
             padding: 12px;
             border-radius: 12px;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -201,7 +198,6 @@
             margin-right: 1rem;
         }
 
-        /* Mobile Popup Menu (3 dots) */
         .popup-menu {
             position: fixed;
             top: 50px;
@@ -224,7 +220,6 @@
             transform: translateX(-50%) translateY(10px);
         }
 
-        /* Mobile Category Popup (half screen) */
         .category-popup {
             position: fixed;
             bottom: 0;
@@ -242,7 +237,22 @@
         .category-popup.active {
             transform: translateY(0);
         }
-        
+
+        /* Adjustments for the Summer Sale Banner text on mobile */
+        @media (max-width: 767px) {
+            .banner-content {
+                text-align: left; /* Align text to the left on mobile */
+                padding-left: 1.5rem; /* Add some padding on the left */
+                padding-right: 1.5rem; /* Add some padding on the right */
+            }
+            .banner-title {
+                font-size: 2rem; /* Adjust font size for mobile */
+                line-height: 1.2;
+            }
+            .banner-shop-now {
+                font-size: 0.875rem; /* Adjust font size for mobile */
+            }
+        }
     </style>
 </head>
 <body class="bg-background">
@@ -250,7 +260,7 @@
 
     <header class="fixed-header hidden md:block bg-light shadow-md py-4">
         <div class="max-w-screen-xl mx-auto px-6 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-primary">Stylfy</h1>
+            <h1 class="text-3xl font-bold text-primary">Stylfie Optics</h1>
             
             <div class="flex-1 max-w-lg mx-8 relative">
                 <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
@@ -263,15 +273,17 @@
                 <a href="#" class="font-medium text-dark hover:text-secondary transition-colors">Boy</a>
                 <a href="#" class="font-medium text-dark hover:text-secondary transition-colors">Girl</a>
                 <a href="#" class="text-xl text-dark hover:text-secondary transition-colors" data-view="wishlist" onclick="showView('wishlist', this)">
-                    <i class="fas fa-heart"></i> </a>
+                    <i class="fas fa-heart"></i>
+                </a>
                 <a href="#" class="text-xl text-dark hover:text-secondary transition-colors" data-view="cart" onclick="showView('cart', this)">
-                    <i class="fas fa-shopping-cart"></i> </a>
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
             </div>
         </div>
     </header>
 
     <header class="fixed-header md:hidden bg-light shadow-md py-4 px-6 flex justify-between items-center">
-        <h1 class="text-3xl font-bold text-primary">Stylfy</h1>
+        <h1 class="text-3xl font-bold text-primary">Stylfie Optics</h1>
         <div class="flex items-center space-x-4">
             <i id="mobile-search-btn" class="fas fa-search text-xl text-dark hover:text-secondary transition-colors cursor-pointer"></i>
             <i id="mobile-menu-btn" class="fas fa-ellipsis-v text-xl text-dark hover:text-secondary transition-colors cursor-pointer"></i>
@@ -306,13 +318,11 @@
         <div id="homeView" class="w-full flex-1 flex flex-col fade-in">
             <main class="page-content overflow-y-auto p-4">
                 <div class="relative w-full rounded-2xl overflow-hidden shadow-lg mb-6">
-                    <img src="https://placehold.co/1200x400/1A2E5C/F5F5F5?text=Summer+Sale" alt="Summer Sale: Up to 50% Off" class="w-full h-auto object-cover">
-                    <div class="absolute inset-0 bg-dark bg-opacity-40 flex flex-col justify-end p-6">
-                        <h2 class="text-light text-3xl md:text-5xl font-bold leading-tight drop-shadow-lg">
-                            Summer Sale: <br> Up to 50% Off
-                        </h2>
-                        <a href="#" class="mt-2 text-light text-sm font-semibold hover:underline">Shop Now <i class="fas fa-arrow-right ml-1"></i></a>
-                    </div>
+                    <img src="https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-bigvisiondays-oe-260825.png" alt="Summer Sale: Up to 50% Off" class="w-full h-auto object-cover">
+                    <div class="absolute inset-0 bg-dark bg-opacity-40 flex flex-col justify-end p-6 banner-content">
+                        <h2 style="color: rgb(255, 255, 255);"class="text-light text-3xl md:text-5xl font-bold leading-tight drop-shadow-lg banner-title">
+                            </h2>
+                        </div>
                 </div>
 
                 <section class="mb-8">
@@ -320,28 +330,28 @@
                     
                     <div class="category-list">
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Glasses" alt="Prescription Glasses" class="category-card-img">
+                            <img src="https://media.post.rvohealth.io/wp-content/uploads/sites/2/2021/02/292053-Will-Felix-Gray-Glasses-Really-Cure-Your-Blue-Light-Blues-732x549-Feature-732x549.jpg" alt="Prescription Glasses" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Prescription Glasses</h4>
                                 <p class="text-gray-500 text-sm">Customized vision correction</p>
                             </div>
                         </a>
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Lenses" alt="Lenses Only" class="category-card-img">
+                            <img src="https://opticalbazzar.com/cdn/shop/products/HTB1k7VnaInrK1RkHFrdq6xCoFXaM_300x300.jpg?v=1601106515" alt="Lenses Only" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Lenses Only</h4>
                                 <p class="text-gray-500 text-sm">Upgrade your existing frames</p>
                             </div>
                         </a>
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Contacts" alt="Contact Lenses" class="category-card-img">
+                            <img src="https://static.royacdn.com/Site-f403822b-b7ed-4030-bbe7-af1d2d8d97f3/Services/contacts_hydrate_rectangle.png" alt="Contact Lenses" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Contact Lenses</h4>
                                 <p class="text-gray-500 text-sm">Daily, weekly, and monthly options</p>
                             </div>
                         </a>
                         <a href="#" class="category-card">
-                            <img src="https://placehold.co/80x60/C0C0C0/1A2E5C?text=Sunglasses" alt="Sunglasses/Frames" class="category-card-img">
+                            <img src="https://www.shutterstock.com/image-photo/trendy-sunglasses-different-design-eyeglasses-260nw-2410897629.jpg" alt="Sunglasses/Frames" class="category-card-img">
                             <div class="flex-1">
                                 <h4 class="font-semibold text-lg">Sunglasses/Without Power Frames</h4>
                                 <p class="text-gray-500 text-sm">Stylish protection from the sun</p>
@@ -353,7 +363,79 @@
                 <section>
                     <h3 class="text-2xl font-bold mb-4 text-dark">Featured Frames</h3>
                     <div id="featured-products-container" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/aviator.jpg" alt="Aviator Classic" class="w-full h-32 object-cover " style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">Aviator Classic</h4>
+                                    <p class="text-primary font-bold mt-1">₹1,500</p>
+                                </div>
+                            </div>
                         </div>
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/image179.png" alt="Round Vintage" class="w-full h-32 object-cover "style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">Round Vintage</h4>
+                                    <p class="text-primary font-bold mt-1">₹1,200</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/clubmaster.jpg" alt="clumbster" class="w-full h-32 object-cover "style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">clumbster</h4>
+                                    <p class="text-primary font-bold mt-1">₹1,800</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg" alt="Cat Eye Chic" class="w-full h-32 object-cover "style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">Cat Eye Chic</h4>
+                                    <p class="text-primary font-bold mt-1">₹1,650</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/trans.jpg" alt="Transparent" class="w-full h-32 object-cover "style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">Transparent</h4>
+                                    <p class="text-primary font-bold mt-1">₹1,400</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/blend.jpg" alt="Blend edit" class="w-full h-32 object-cover "style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">Blend edit</h4>
+                                    <p class="text-primary font-bold mt-1">₹2,100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/clipon.jpg" alt="Air clip on" class="w-full h-32 object-cover "style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">Air clip on</h4>
+                                    <p class="text-primary font-bold mt-1">₹2,100</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative ">
+                            <img src="https://static1.lenskart.com/media/desktop/img/Sep21/airflex.jpg" alt="BAir flex " class="w-full h-32 object-cover "style="height: fit-content;">
+                            <div class="p-3 flex justify-between items-center">
+                                <div>
+                                    <h4 class="font-semibold text-sm truncate">Air flex </h4>
+                                    <p class="text-primary font-bold mt-1">₹2,100</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </main>
         </div>
@@ -440,12 +522,12 @@
     <footer class="hidden md:block bg-primary text-light py-8">
         <div class="max-w-screen-xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
-                <h4 class="text-xl font-bold text-secondary mb-4">Stylfy Optics</h4>
-                <p class="text-gray-400 text-sm">Your premier destination for stylish and high-quality eyewear. We offer prescription glasses, sunglasses, and contact lenses to suit your unique style.</p>
+                <h4 style="color: #2ABFAC;" class="text-xl font-bold text-light mb-4">Stylfy Optics</h4>
+                <p class="text-gray-200 text-sm">Your premier destination for stylish and high-quality eyewear. We offer prescription glasses, sunglasses, and contact lenses to suit your unique style.</p>
             </div>
             <div>
-                <h4 class="text-xl font-bold mb-4">Quick Links</h4>
-                <ul class="space-y-2 text-gray-400">
+                <h4 style="color: #2ABFAC;"class="text-xl font-bold text-light mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-gray-200">
                     <li><a href="#" class="hover:text-secondary transition-colors">Shop All</a></li>
                     <li><a href="#" class="hover:text-secondary transition-colors">About Us</a></li>
                     <li><a href="#" class="hover:text-secondary transition-colors">Contact</a></li>
@@ -453,11 +535,11 @@
                 </ul>
             </div>
             <div>
-                <h4 class="text-xl font-bold mb-4">Follow Us</h4>
+                <h4 style="color: #2ABFAC;" class="text-xl font-bold text-light mb-4">Follow Us</h4>
                 <div class="flex space-x-4">
-                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
-                    <a href="#" class="text-gray-400 hover:text-secondary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                    <a href="#" class="text-gray-200 hover:text-secondary transition-colors"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="#" class="text-gray-200 hover:text-secondary transition-colors"><i class="fab fa-instagram text-xl"></i></a>
+                    <a href="#" class="text-gray-200 hover:text-secondary transition-colors"><i class="fab fa-twitter text-xl"></i></a>
                 </div>
             </div>
         </div>
@@ -487,14 +569,14 @@
         const toast = document.getElementById('toast');
 
         // Dummy product data
-        const products = [
-            { id: 1, name: "Aviator Classic", price: 1500, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Aviator" },
-            { id: 2, name: "Round Vintage", price: 1200, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Vintage" },
-            { id: 3, name: "Wayfarer Modern", price: 1800, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Wayfarer" },
-            { id: 4, name: "Cat Eye Chic", price: 1650, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Cat+Eye" },
-            { id: 5, name: "Square Classic", price: 1400, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Square" },
-            { id: 6, name: "Geometric Gold", price: 2100, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Geometric" },
-        ];
+        // const products = [
+        //     { id: 1, name: "Aviator Classic", price: 1500, image: "https://static1.lenskart.com/media/desktop/img/Sep21/aviator.jpg" },
+        //     { id: 2, name: "Round Vintage", price: 1200, image: "https://static1.lenskart.com/media/desktop/img/Sep21/image179.png" },
+        //     { id: 3, name: "Wayfarer Modern", price: 1800, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Wayfarer" },
+        //     { id: 4, name: "Cat Eye Chic", price: 1650, image: "https://static1.lenskart.com/media/desktop/img/Sep21/cateeye.jpg" },
+        //     { id: 5, name: "Square Classic", price: 1400, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Square" },
+        //     { id: 6, name: "Geometric Gold", price: 2100, image: "https://placehold.co/200x200/C0C0C0/1A2E5C?text=Geometric" },
+        // ];
         
         let cart = [];
         let wishlist = [];
@@ -508,22 +590,7 @@
         }
 
         function renderProducts() {
-            featuredProductsContainer.innerHTML = '';
-            products.forEach(product => {
-                const card = document.createElement('div');
-                card.className = "product-card bg-light rounded-xl shadow-md overflow-hidden cursor-pointer relative";
-                
-                card.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="w-full h-32 object-cover">
-                    <div class="p-3 flex justify-between items-center">
-                        <div>
-                            <h4 class="font-semibold text-sm truncate">${product.name}</h4>
-                            <p class="text-primary font-bold mt-1">₹${product.price.toLocaleString()}</p>
-                        </div>
-                    </div>
-                `;
-                featuredProductsContainer.appendChild(card);
-            });
+            // This function is no longer needed to render the featured products
         }
 
         function renderCart() {
@@ -654,21 +721,18 @@
         }
 
         function showView(viewName, clickedNav = null) {
-            // Hide all views
             Object.values(views).forEach(view => {
                 if (view) {
                     view.classList.add('hidden');
                     view.classList.remove('fade-in');
                 }
             });
-            // Show the selected view
             const selectedView = views[viewName];
             if (selectedView) {
                 selectedView.classList.remove('hidden');
                 selectedView.classList.add('fade-in');
             }
 
-            // Update active navigation item
             navItems.forEach(item => {
                 item.classList.remove('active', 'text-primary');
                 item.classList.add('text-gray-500');
@@ -677,7 +741,6 @@
                 clickedNav.classList.add('active', 'text-primary');
                 clickedNav.classList.remove('text-gray-500');
             }
-            // Hide all popups when a new view is shown
             hideAllPopups();
         }
 
@@ -685,7 +748,6 @@
             mobileSearchBar.classList.add('hidden');
             mobileMenu.classList.remove('active');
             categoryPopup.classList.remove('active');
-            // Reset category nav button state if popup is closed
             if (categoryNavBtn) {
                 categoryNavBtn.classList.remove('active', 'text-primary');
                 categoryNavBtn.classList.add('text-gray-500');
@@ -709,7 +771,6 @@
             }
         });
         
-        // Event listener for mobile search button
         if (mobileSearchBtn) {
             mobileSearchBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -719,7 +780,6 @@
             });
         }
 
-        // Event listener for mobile menu button
         if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -729,7 +789,6 @@
             });
         }
 
-        // Event listener for mobile category button
         if (categoryNavBtn) {
             categoryNavBtn.addEventListener('click', (event) => {
                 event.preventDefault();
@@ -752,7 +811,6 @@
             });
         }
         
-        // Event listener to close category popup
         if (closeCategoryPopupBtn) {
             closeCategoryPopupBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -767,7 +825,6 @@
             if (homeNavItem) {
                 showView('home', homeNavItem);
             }
-            renderProducts();
             renderCart();
             renderWishlist();
         });
