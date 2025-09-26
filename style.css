@@ -1,0 +1,315 @@
+/* Custom Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+/* Custom Color Palette */
+:root {
+    --primary-color: #1A2E5C;
+    --secondary-color: #2ABFAC;
+    --background-color: #F5F5F5;
+    --dark-color: #333;
+    --light-color: #fff;
+    --cta-color: #FF9900;
+    --accent-color: #C0C0C0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--dark-color);
+    padding-top: 80px; /* Space for fixed header */
+    padding-bottom: 80px; /* Space for mobile bottom nav */
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-bottom: 0;
+    }
+}
+
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: var(--light-color);
+}
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background-color: var(--light-color);
+}
+
+.cart-count-badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 0.65rem;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Product Card */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+.product-card img {
+    height: auto;
+    aspect-ratio: 1 / 1; 
+    object-fit: cover;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, bottom 0.3s;
+    z-index: 1000;
+    font-size: 0.9rem;
+}
+
+.toast.show {
+    opacity: 1;
+    visibility: visible;
+    bottom: 100px; /* Position above bottom nav on mobile */
+}
+/* ADD THESE STYLES TO THE BOTTOM OF YOUR CSS FILE */
+
+/* Product Detail Page Layout */
+.product-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Image Gallery Styles */
+.product-gallery .main-image {
+    width: 100%;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 1rem;
+}
+
+.thumbnail-container {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.thumbnail-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.thumbnail-img:hover {
+    border-color: #d1d5db; /* gray-300 */
+}
+
+.thumbnail-img.active {
+    border-color: var(--primary-color);
+}
+
+
+/* Product Info Styles */
+.product-info h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    line-height: 1.2;
+}
+
+.product-info .price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dark-color);
+    margin: 1rem 0;
+}
+
+.product-info .description {
+    color: #4b5563; /* gray-600 */
+    line-height: 1.6;
+}
+
+.product-info .actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .product-info .actions {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.product-info .wishlist-btn-detail {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    flex-shrink: 0;
+}
+/* ADD THESE STYLES TO THE BOTTOM OF YOUR CSS FILE */
+
+/* New Product Detail Action Styles */
+.product-info .actions {
+    display: flex;
+    gap: 1rem; /* 16px */
+    align-items: center;
+}
+
+/* REMOVE the old ".cart-action-group" styles and ADD these new ones */
+
+/* Product Detail Action Styles */
+.product-info .actions {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* New Quantity Slider Styles */
+.quantity-slider-group {
+    width: 100%;
+}
+
+.quantity-slider-group .label {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+#quantity-value {
+    font-weight: bold;
+    color: var(--primary-color);
+    background-color: #e0eaff;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 0.9em;
+}
+
+.quantity-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #e5e7eb; /* gray-200 */
+    border-radius: 5px;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity .2s;
+}
+
+.quantity-slider:hover {
+    opacity: 1;
+}
+
+.quantity-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.quantity-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: var(--primary-color);
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Button group for Add to Cart & Wishlist */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+}
+
+.button-group .add-to-cart-btn-main {
+    flex-grow: 1;
+    height: 50px;
+    font-size: 1rem;
+}
+
+.button-group .wishlist-btn-detail {
+    height: 50px;
+    width: 50px;
+    flex-shrink: 0;
+}
+
+/* New Wishlist Button Style */
+.wishlist-btn-detail {
+    height: 50px;
+    width: 50px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--dark-color);
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    flex-shrink: 0;
+}
+
+.wishlist-btn-detail:hover {
+    background-color: #f3f4f6;
+}
