@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = cart.map(item => `
             <div class="flex items-center p-4 bg-white rounded-xl shadow-sm">
                 <a href="product.html?id=${item.id}">
-                    <img src="${item.images[0]}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover" loading="lazy" decoding="async">
+                    <img src="${item.images[0]}" alt="${item.name}" class="w-16 h-16 rounded-lg object-contain" loading="lazy" decoding="async">
                 </a>
                 <div class="flex-1 ml-4">
                     <a href="product.html?id=${item.id}" class="hover:text-primary">
@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         container.innerHTML = wishlist.map(item => `
             <div class="flex items-center p-4 bg-white rounded-xl shadow-sm">
-                <img src="${item.images[0]}" alt="${item.name}" class="w-16 h-16 rounded-lg object-cover" loading="lazy" decoding="async">
+                <img src="${item.images[0]}" alt="${item.name}" class="w-16 h-16 rounded-lg object-contain" loading="lazy" decoding="async">
                 <div class="flex-1 ml-4">
                     <h4 class="font-semibold">${item.name}</h4>
                     <p class="text-primary font-bold mt-1">₹${item.price.toLocaleString()}</p>
