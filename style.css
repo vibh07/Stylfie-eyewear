@@ -321,4 +321,66 @@ h1, h2, h3 {
     cursor: pointer;
     font-size: 1.1rem;
 }
+/* ADD THESE STYLES TO THE BOTTOM OF YOUR CSS FILE */
 
+/* Services Section Styles */
+.service-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--light-color);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+    text-decoration: none;
+    color: inherit;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
+.service-text {
+    margin-right: 1rem;
+}
+
+.service-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.service-subtitle {
+    font-size: 0.9rem;
+    color: #6b7280; /* gray-500 */
+}
+
+.service-image {
+    width: 90px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+/* ADD THESE STYLES TO THE BOTTOM OF YOUR CSS FILE */
+
+/* Responsive Services Section */
+.services-container {
+    display: grid;
+    gap: 1rem; /* This creates space between the cards */
+}
+
+/* This media query only applies to screens 768px and wider */
+@media (min-width: 768px) {
+    .services-container {
+        /* Creates the two-column grid */
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* We no longer need margin on individual cards, the gap handles it */
+.service-card {
+    margin-bottom: 0;
+}
