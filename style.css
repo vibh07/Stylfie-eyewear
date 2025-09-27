@@ -440,3 +440,71 @@ h1, h2, h3 {
 .indicator-dot.active {
   background-color: white;
 }
+
+
+
+
+
+
+
+
+/* --- New styles for category cards and animated borders --- */
+
+/* 1. Resize the cards to be smaller and more consistent */
+.category-card {
+    position: relative;
+    overflow: hidden;
+    padding: 0.75rem;
+    height: 150px; /* Gives all cards a consistent height */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-card img {
+    width: auto ;  /* Sets a fixed image width */
+    height: 100%; /* Sets a fixed image height */
+    object-fit: contain; /* Ensures the image scales properly inside the box */
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+/* 2. Create the animated border effect */
+.category-card-red::before,
+.category-card-yellow::before,
+.category-card-blue::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    border: 4px solid transparent;
+    background: linear-gradient(to right, 
+        var(--border-color) 25%, 
+        transparent 25%, transparent 75%, 
+        var(--border-color) 75%
+    ) border-box;
+    background-size: 200% 100%;
+    animation: border-revolve 3s linear infinite;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+}
+
+/* Keyframe animation for the revolving line */
+@keyframes border-revolve {
+    from { background-position: 100% 0; }
+    to { background-position: -100% 0; }
+}
+
+/* 3. Define the colors for the border animation */
+.category-card-red { --border-color: #ef4444; }    /* Red */
+.category-card-yellow { --border-color: #f59e0b; } /* Yellow */
+.category-card-blue { --border-color: #3b82f6; }   /* Blue */
+/* Add this new color definition for the green border */
+.category-card-green { --border-color: #22c55e; } /* Green */
