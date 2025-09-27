@@ -1,3 +1,10 @@
+// Add this array near the top of main.js
+const bannerImages = [
+    'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-bigvisiondays-oe-260825.png',
+    'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-twyst-220925.png',
+    'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-hellokitty-16sep25.png',
+    'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-zodiac-16sep25.png'
+];
 document.addEventListener('DOMContentLoaded', () => {
 
     // ===== STATE MANAGEMENT =====
@@ -7,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const saveWishlist = (wishlist) => localStorage.setItem('stylfieWishlist_v1', JSON.stringify(wishlist));
     const getOrders = () => JSON.parse(localStorage.getItem('stylfieOrders_v1')) || [];
     const saveOrders = (orders) => localStorage.setItem('stylfieOrders_v1', JSON.stringify(orders));
-
+    
     // ===== CORE FUNCTIONS =====
     const showToast = (message) => {
         const toast = document.getElementById('toast');
@@ -324,6 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageId = document.body.id;
     if (pageId === 'home-page-body') {
         renderProductGrid('featured-products-container', products.slice(0, 4));
+        startBannerSlider(); // <-- ADD THIS LINE
     } else if (pageId === 'shop-page-body') {
         renderProductGrid('shop-products-container', products);
     } else if (pageId === 'product-page-body') {
@@ -337,3 +345,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     updateCartCount();
 });
+//////////////////////////////////////////////////////////////////////////////////
+// Add this new function to main.js
+// REPLACE your old startBannerSlider function with this new one
+
+const startBannerSlider = () => {
+    const bannerImageEl = document.getElementById('banner-image');
+    const indicatorsContainer = document.getElementById('banner-indicators');
+    
+    // Exit if the necessary elements aren't on the page
+    if (!bannerImageEl || !indicatorsContainer) return;
+
+    // 1. Create a dot for each banner image
+    indicatorsContainer.innerHTML = ''; // Clear any existing dots first
+    bannerImages.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.classList.add('indicator-dot');
+        indicatorsContainer.appendChild(dot);
+    });
+
+    const dots = indicatorsContainer.querySelectorAll('.indicator-dot');
+
+    // 2. Function to update the active dot
+    const updateActiveIndicator = (index) => {
+        dots.forEach(dot => dot.classList.remove('active'));
+        if (dots[index]) {
+            dots[index].classList.add('active');
+        }
+    };
+
+    let currentBannerIndex = 0;
+    updateActiveIndicator(currentBannerIndex); // Set the first dot as active initially
+
+    // 3. Set the interval to change slide and update indicator
+    setInterval(() => {
+        currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
+        bannerImageEl.src = bannerImages[currentBannerIndex];
+        updateActiveIndicator(currentBannerIndex);
+    }, 1500); // Note: I increased this to 3 seconds for a better user experience.
+};
