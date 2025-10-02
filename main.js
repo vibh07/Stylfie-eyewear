@@ -282,6 +282,73 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
     };
+    ////////////////////////////////////
+    const setupFilterModal = () => {
+        const filterBtn = document.getElementById('filter-btn');
+        const filterModal = document.getElementById('filter-modal');
+        const closeModalBtn = document.getElementById('close-filter-modal');
+        const applyFiltersBtn = document.getElementById('apply-filters-btn');
+
+        if (!filterBtn || !filterModal) return;
+
+        const openModal = () => filterModal.classList.remove('hidden');
+        const closeModal = () => filterModal.classList.add('hidden');
+
+        filterBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        
+        applyFiltersBtn.addEventListener('click', () => {
+            applyFiltersAndSort();
+            closeModal();
+        });
+
+        filterModal.addEventListener('click', (e) => {
+            if (e.target === filterModal) {
+                closeModal();
+            }
+        });
+    };
+    ////////////////////////////////////////////////////////////////////////
+    // ===== SHOP PAGE FILTERING & SORTING LOGIC =====
+    const applyFiltersAndSort = () => {
+        let filteredProducts = [...products];
+
+        // --- Filtering ---
+        const activeFilters = {
+            category: [],
+            type: []
+        };
+        document.querySelectorAll('.filter-checkbox:checked').forEach(checkbox => {
+            activeFilters[checkbox.dataset.filter].push(checkbox.value);
+        });
+
+        if (activeFilters.category.length > 0) {
+            filteredProducts = filteredProducts.filter(p => activeFilters.category.includes(p.category));
+        }
+        if (activeFilters.type.length > 0) {
+            filteredProducts = filteredProducts.filter(p => activeFilters.type.includes(p.type));
+        }
+
+        const priceRange = document.getElementById('price-range');
+        if (priceRange) {
+            const maxPrice = parseInt(priceRange.value);
+            filteredProducts = filteredProducts.filter(p => p.price <= maxPrice);
+        }
+
+        // --- Sorting ---
+        const sortValue = document.getElementById('sort-select').value;
+        if (sortValue === 'price-asc') {
+            filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (sortValue === 'price-desc') {
+            filteredProducts.sort((a, b) => b.price - a.price);
+        } else if (sortValue === 'trending') {
+            filteredProducts = filteredProducts.filter(p => p.trending);
+        } else if (sortValue === 'best-selling') {
+            filteredProducts = filteredProducts.filter(p => p.bestSelling);
+        }
+
+        renderProductGrid('shop-products-container', filteredProducts);
+    };
 
     // ===== EVENT LISTENERS =====
     document.body.addEventListener('input', (e) => {
@@ -291,9 +358,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 quantityValue.textContent = e.target.value;
             }
         }
+        // Price slider ki value dikhayein, lekin filter apply na karein
+        if(e.target.matches('#price-range')) {
+            document.getElementById('price-value').textContent = e.target.value;
+        }
     });
     
+    document.body.addEventListener('change', (e) => {
+        // Sirf sort select karne par turant apply karein
+        if(e.target.matches('#sort-select')) {
+            applyFiltersAndSort();
+        }
+    });
+
     document.body.addEventListener('click', (e) => {
+        if(e.target.matches('#clear-filters-btn')) {
+            document.querySelectorAll('.filter-checkbox').forEach(c => c.checked = false);
+            const priceRange = document.getElementById('price-range');
+            if(priceRange) {
+                priceRange.value = priceRange.max;
+                document.getElementById('price-value').textContent = priceRange.max;
+            }
+            return; // Sirf clear karein, apply nahi
+        }
+        
         const thumbnail = e.target.closest('.thumbnail-img');
         if (thumbnail) {
             const mainImage = document.querySelector('.main-image');
@@ -304,6 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const btn = e.target.closest('button');
         if (!btn) return;
+
+        // Baki sabhi buttons ka logic
         const productId = parseInt(btn.dataset.productId);
         if (btn.matches('.add-to-cart-btn-main')) {
             const quantitySlider = document.getElementById('quantity-slider');
@@ -326,14 +416,14 @@ document.addEventListener('DOMContentLoaded', () => {
             removeOrder(orderId);
         }
     });
-
     // ===== INITIALIZE PAGE =====
     const pageId = document.body.id;
     if (pageId === 'home-page-body') {
         renderProductGrid('featured-products-container', products.slice(0, 4));
         startBannerSlider(); // <-- ADD THIS LINE
     } else if (pageId === 'shop-page-body') {
-        renderProductGrid('shop-products-container', products);
+    applyFiltersAndSort();
+    setupFilterModal(); // Modal ko setup karne ke liye is line ko jodein
     } else if (pageId === 'product-page-body') {
         renderProductDetailPage();
     } else if (pageId === 'cart-page-body') {
