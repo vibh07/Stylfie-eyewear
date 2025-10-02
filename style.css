@@ -508,3 +508,114 @@ h1, h2, h3 {
 .category-card-blue { --border-color: #3b82f6; }   /* Blue */
 /* Add this new color definition for the green border */
 .category-card-green { --border-color: #22c55e; } /* Green */
+
+
+/* Add these styles to the bottom of your style.css file */
+
+/* --- Shop Page Controls (Filter and Sort Buttons) --- */
+
+/* Dono buttons ko ek line mein rakhne ke liye container */
+.shop-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Buttons ke beech mein space */
+    margin-bottom: 1rem;
+}
+
+/* Dono buttons ke liye common style */
+.shop-control-button {
+    border: 1px solid #d1d5db; /* gray-300 */
+    border-radius: 8px;
+    padding: 0.5rem 1rem; /* 8px 16px */
+    font-size: 0.875rem; /* 14px */
+    font-weight: 500;
+    background-color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Icon aur text ke beech mein space */
+}
+
+/* Button par mouse le jaane par effect */
+.shop-control-button:hover {
+    background-color: #f9fafb; /* gray-50 */
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+/* Sort dropdown ke liye specific style */
+#sort-select {
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #ffffff;
+}
+
+/* --- Filter Modal (Popup) Styles --- */
+
+.filter-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.filter-modal-overlay:not(.hidden) {
+    opacity: 1;
+}
+
+.filter-modal-content {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    transform: scale(0.95);
+    transition: transform 0.3s ease;
+}
+
+.filter-modal-overlay:not(.hidden) .filter-modal-content {
+    transform: scale(1);
+}
+
+.hidden {
+    display: none;
+}
+/* --- Shop Header Responsive Fix --- */
+.shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap; /* Agar zaroorat pade to wrap karein */
+    gap: 1rem;      /* Items ke beech space */
+}
+
+/* Mobile screen ke liye (500px se kam) */
+@media (max-width: 500px) {
+    .shop-header {
+        flex-direction: column;      /* Items ko upar-neeche rakhein */
+        align-items: flex-start;   /* Sabko left se start karein */
+    }
+    
+    .shop-controls {
+        width: 100%;                 /* Buttons waale div ko poori chaudai dein */
+        display: flex;
+        justify-content: space-between; /* Filter aur Sort ko kone mein bheinjein */
+    }
+}
+/* --- Apply Button Fix --- */
+.bg-primary {
+    background-color: var(--primary-color); /* Isse button ka background color set hoga */
+}
