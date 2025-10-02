@@ -9,7 +9,7 @@ const bannerImages = [
 const applyFiltersFromURL = () => {
     // Get the parameters from the URL (e.g., ?type=frames&category=men)
     const params = new URLSearchParams(window.location.search);
-    
+
     // Get the value of 'type' and 'category' from the URL
     const type = params.get('type');
     const category = params.get('category');
@@ -35,13 +35,13 @@ let checkoutItems = [];
 let shippingDetails = {};
 document.addEventListener('DOMContentLoaded', () => {
     // Add this new function inside the DOMContentLoaded listener
-const openWhatsAppQuery = (e) => {
-    e.preventDefault();
-    const phoneNumber = '918929083904';
-    const message = 'Hi i have an query ?';
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank');
-};
+    const openWhatsAppQuery = (e) => {
+        e.preventDefault();
+        const phoneNumber = '918929083904';
+        const message = 'Hi i have an query ?';
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+    };
 
     // ===== STATE MANAGEMENT =====
     const getCart = () => JSON.parse(localStorage.getItem('stylfieCart_v1')) || [];
@@ -50,7 +50,7 @@ const openWhatsAppQuery = (e) => {
     const saveWishlist = (wishlist) => localStorage.setItem('stylfieWishlist_v1', JSON.stringify(wishlist));
     const getOrders = () => JSON.parse(localStorage.getItem('stylfieOrders_v1')) || [];
     const saveOrders = (orders) => localStorage.setItem('stylfieOrders_v1', JSON.stringify(orders));
-    
+
     // ===== CORE FUNCTIONS =====
     const showToast = (message) => {
         const toast = document.getElementById('toast');
@@ -144,12 +144,12 @@ const openWhatsAppQuery = (e) => {
     const closeCheckoutModal = () => {
         document.getElementById('checkout-modal-overlay').classList.add('hidden');
     };
-    
+
     const showSummaryView = () => {
         const form = document.getElementById('shipping-address-form');
         const formData = new FormData(form);
         shippingDetails = Object.fromEntries(formData.entries());
-        
+
         const productsHtml = checkoutItems.map(item => `
             <div class="flex items-center text-sm mb-2">
                 <img src="${item.images[0]}" class="w-auto h-12 rounded-md mr-3">
@@ -199,46 +199,46 @@ const openWhatsAppQuery = (e) => {
         const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(whatsappUrl, '_blank');
     };
-    
+
     // REPLACE your old placeFinalOrder function with this new one
-const placeFinalOrder = () => {
-    const total = checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const newOrder = { 
-        id: Date.now(), 
-        date: new Date().toLocaleDateString(), 
-        items: checkoutItems, 
-        total: total,
-        customer: shippingDetails
+    const placeFinalOrder = () => {
+        const total = checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        const newOrder = {
+            id: Date.now(),
+            date: new Date().toLocaleDateString(),
+            items: checkoutItems,
+            total: total,
+            customer: shippingDetails
+        };
+
+        const allOrders = getOrders();
+        allOrders.push(newOrder);
+        saveOrders(allOrders);
+
+        // --- IMPORTANT CHANGES START HERE ---
+
+        // 1. Pehle cart clear karein aur UI turant update karein
+        saveCart([]);
+        updateCartCount();
+        closeCheckoutModal();
+
+        // 2. Heavy kaam (animation, redirect) ko thoda delay karein
+        // Isse UI update block nahi hoga aur app fast feel hogi
+        setTimeout(() => {
+            document.getElementById('congrats-overlay').classList.remove('hidden');
+            startConfetti();
+            redirectToWhatsApp(newOrder);
+
+            // 8 seconds ke baad congrats screen hide karein
+            setTimeout(() => {
+                const congratsOverlay = document.getElementById('congrats-overlay');
+                if (congratsOverlay) {
+                    congratsOverlay.classList.add('hidden');
+                }
+            }, 8000);
+        }, 100); // 100ms ka chhota sa delay
     };
 
-    const allOrders = getOrders();
-    allOrders.push(newOrder);
-    saveOrders(allOrders);
-    
-    // --- IMPORTANT CHANGES START HERE ---
-
-    // 1. Pehle cart clear karein aur UI turant update karein
-    saveCart([]); 
-    updateCartCount();
-    closeCheckoutModal();
-
-    // 2. Heavy kaam (animation, redirect) ko thoda delay karein
-    // Isse UI update block nahi hoga aur app fast feel hogi
-    setTimeout(() => {
-        document.getElementById('congrats-overlay').classList.remove('hidden');
-        startConfetti();
-        redirectToWhatsApp(newOrder);
-        
-        // 8 seconds ke baad congrats screen hide karein
-        setTimeout(() => {
-           const congratsOverlay = document.getElementById('congrats-overlay');
-           if (congratsOverlay) {
-               congratsOverlay.classList.add('hidden');
-           }
-        }, 8000);
-    }, 100); // 100ms ka chhota sa delay
-};
-    
     const removeOrder = (orderId) => {
         let orders = getOrders();
         orders = orders.filter(order => order.id !== orderId);
@@ -257,10 +257,10 @@ const placeFinalOrder = () => {
         const fragment = document.createDocumentFragment();
         productList.forEach(p => {
             const isInWishlist = wishlist.some(item => item.id === p.id);
-            const heartIcon = isInWishlist 
-                ? `<i class="fa-solid fa-heart" style="color: #ef4444;"></i>` 
+            const heartIcon = isInWishlist
+                ? `<i class="fa-solid fa-heart" style="color: #ef4444;"></i>`
                 : `<i class="fa-regular fa-heart"></i>`;
-            
+
             const card = document.createElement('div');
             card.className = 'product-card bg-light rounded-xl shadow-md overflow-hidden flex flex-col relative';
             card.innerHTML = `
@@ -296,10 +296,10 @@ const placeFinalOrder = () => {
 
         const wishlist = getWishlist();
         const isInWishlist = wishlist.some(item => item.id === product.id);
-        const heartIcon = isInWishlist 
-            ? `<i class="fa-solid fa-heart" style="color: #ef4444;"></i>` 
+        const heartIcon = isInWishlist
+            ? `<i class="fa-solid fa-heart" style="color: #ef4444;"></i>`
             : `<i class="fa-regular fa-heart"></i>`;
-        
+
         container.innerHTML = `
             <div class="product-detail-layout">
                 <div class="product-gallery">
@@ -415,7 +415,7 @@ const placeFinalOrder = () => {
 
     const renderOrdersPage = () => {
         const container = document.getElementById('orders-container');
-        if(!container) return;
+        if (!container) return;
         const orders = getOrders();
         if (orders.length === 0) {
             container.innerHTML = `<div class="text-center text-gray-500 mt-8">You have no past orders.</div>`;
@@ -453,7 +453,7 @@ const placeFinalOrder = () => {
 
         filterBtn.addEventListener('click', openModal);
         closeModalBtn.addEventListener('click', closeModal);
-        
+
         applyFiltersBtn.addEventListener('click', () => {
             applyFiltersAndSort();
             closeModal();
@@ -516,26 +516,26 @@ const placeFinalOrder = () => {
             }
         }
         // Price slider ki value dikhayein, lekin filter apply na karein
-        if(e.target.matches('#price-range')) {
+        if (e.target.matches('#price-range')) {
             document.getElementById('price-value').textContent = e.target.value;
         }
     });
-    
+
     document.body.addEventListener('change', (e) => {
         // Sirf sort select karne par turant apply karein
-        if(e.target.matches('#sort-select')) {
+        if (e.target.matches('#sort-select')) {
             applyFiltersAndSort();
         }
     });
 
     // REPLACE your entire old document.body.addEventListener('click',...) with this
     document.body.addEventListener('click', (e) => {
-         const comingSoonLink = e.target.closest('.coming-soon-btn');
-    if (comingSoonLink) {
-        e.preventDefault(); // This stops the link from doing anything
-        showToast('This category is coming soon!');
-        return; // Stop the rest of the code from running
-    }
+        const comingSoonLink = e.target.closest('.coming-soon-btn');
+        if (comingSoonLink) {
+            e.preventDefault(); // This stops the link from doing anything
+            showToast('This category is coming soon!');
+            return; // Stop the rest of the code from running
+        }
         // Modal and Congrats screen buttons
         if (e.target.matches('#close-checkout-modal') || e.target.closest('#close-checkout-modal')) {
             closeCheckoutModal();
@@ -559,12 +559,12 @@ const placeFinalOrder = () => {
         const thumbnail = e.target.closest('.thumbnail-img');
         if (thumbnail) {
             const mainImage = document.querySelector('.main-image');
-            if(mainImage) mainImage.src = thumbnail.src;
+            if (mainImage) mainImage.src = thumbnail.src;
             document.querySelectorAll('.thumbnail-img').forEach(t => t.classList.remove('active'));
             thumbnail.classList.add('active');
             return;
         }
-        
+
         // General button logic
         const btn = e.target.closest('button');
         if (!btn) return;
@@ -579,11 +579,11 @@ const placeFinalOrder = () => {
             const quantitySlider = document.getElementById('quantity-slider');
             const quantity = parseInt(quantitySlider.value);
             const product = products.find(p => p.id === productId);
-            openCheckoutModal([{...product, quantity: quantity}]); // Open modal for single item
+            openCheckoutModal([{ ...product, quantity: quantity }]); // Open modal for single item
         } else if (btn.matches('#checkoutButton')) {
             openCheckoutModal(getCart()); // Open modal for the whole cart
         } else if (btn.matches('.add-power-btn')) {
-            showToast('Power lens selection feature coming soon!');
+            showToast('Add Power lens selection feature on whatsapp or call!');
         } else if (btn.matches('.remove-from-cart-btn')) {
             showToast('Item removed from cart.');
             removeFromCart(productId);
@@ -621,11 +621,11 @@ const placeFinalOrder = () => {
         });
     }
 
-    if(whatsappHeaderBtn) {
+    if (whatsappHeaderBtn) {
         whatsappHeaderBtn.addEventListener('click', openWhatsAppQuery);
     }
-    
-    if(whatsappFloatingBtn) {
+
+    if (whatsappFloatingBtn) {
         whatsappFloatingBtn.addEventListener('click', openWhatsAppQuery);
     }
 
@@ -636,17 +636,69 @@ const placeFinalOrder = () => {
         }
     });
 
-// ===== INITIALIZE PAGE =====
-// ... (rest of the file)
+    // Add this code block before the "INITIALIZE PAGE" section in main.js
+
+    // --- Contact for Power Lens Modal Logic ---
+    const contactLensModal = document.getElementById('contact-lens-modal');
+    const closeContactLensBtn = document.getElementById('close-contact-lens-modal');
+
+    // Open the modal when a .add-power-btn is clicked
+    document.body.addEventListener('click', (e) => {
+        const powerBtn = e.target.closest('.add-power-btn');
+        if (powerBtn) {
+            const productId = powerBtn.dataset.productId;
+            if (contactLensModal) {
+                // Store the product ID on the modal itself so we can use it later
+                contactLensModal.dataset.productId = productId;
+                contactLensModal.classList.remove('hidden');
+            }
+        }
+    });
+
+    // Close the modal with the 'X' button
+    if (closeContactLensBtn) {
+        closeContactLensBtn.addEventListener('click', () => {
+            contactLensModal.classList.add('hidden');
+        });
+    }
+
+    // Handle the WhatsApp button click inside the modal
+    if (contactLensModal) {
+        contactLensModal.addEventListener('click', (e) => {
+            if (e.target.closest('#modal-whatsapp-btn')) {
+                e.preventDefault();
+                const productId = parseInt(contactLensModal.dataset.productId);
+                const product = products.find(p => p.id === productId);
+
+                if (product) {
+                    const phoneNumber = '918546975219'; // Your new number
+                    let message = `Hi! I'm interested in adding power lenses to the following product:\n\n`;
+                    message += `*Product:* ${product.name}\n`;
+                    message += `*Price:* ₹${product.price.toLocaleString()} + Lens Price\n\n`;
+                    message += `Please assist me with the next steps.`;
+
+                    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+                    window.open(url, '_blank');
+                }
+            }
+        });
+    }
+
+    // ===== INITIALIZE PAGE =====
+    // ... (rest of the file)
+
+
+    // ===== INITIALIZE PAGE =====
+    // ... (rest of the file)
     // ===== INITIALIZE PAGE =====
     const pageId = document.body.id;
     if (pageId === 'home-page-body') {
         renderProductGrid('featured-products-container', products.slice(0, 4));
         startBannerSlider(); // <-- ADD THIS LINE
     } else if (pageId === 'shop-page-body') {
-         applyFiltersFromURL();
-    applyFiltersAndSort();
-    setupFilterModal(); // Modal ko setup karne ke liye is line ko jodein
+        applyFiltersFromURL();
+        applyFiltersAndSort();
+        setupFilterModal(); // Modal ko setup karne ke liye is line ko jodein
     } else if (pageId === 'product-page-body') {
         renderProductDetailPage();
     } else if (pageId === 'cart-page-body') {
@@ -658,7 +710,7 @@ const placeFinalOrder = () => {
     }
     // YEH NAYI LINE ADD KARNI HAI
     loadStateFromLocalStorage();
-    
+
     updateCartCount();
 });
 //////////////////////////////////////////////////////////////////////////////////
@@ -668,7 +720,7 @@ const placeFinalOrder = () => {
 const startBannerSlider = () => {
     const bannerImageEl = document.getElementById('banner-image');
     const indicatorsContainer = document.getElementById('banner-indicators');
-    
+
     // Exit if the necessary elements aren't on the page
     if (!bannerImageEl || !indicatorsContainer) return;
 
@@ -700,4 +752,3 @@ const startBannerSlider = () => {
         updateActiveIndicator(currentBannerIndex);
     }, 1500); // Note: I increased this to 3 seconds for a better user experience.
 };
-
