@@ -522,6 +522,12 @@ const placeFinalOrder = () => {
 
     // REPLACE your entire old document.body.addEventListener('click',...) with this
     document.body.addEventListener('click', (e) => {
+         const comingSoonLink = e.target.closest('.coming-soon-btn');
+    if (comingSoonLink) {
+        e.preventDefault(); // This stops the link from doing anything
+        showToast('This category is coming soon!');
+        return; // Stop the rest of the code from running
+    }
         // Modal and Congrats screen buttons
         if (e.target.matches('#close-checkout-modal') || e.target.closest('#close-checkout-modal')) {
             closeCheckoutModal();
