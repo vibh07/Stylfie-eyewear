@@ -5,6 +5,9 @@ const bannerImages = [
     'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-hellokitty-16sep25.png',
     'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-zodiac-16sep25.png'
 ];
+// Add these new lines at the top of main.js
+let checkoutItems = [];
+let shippingDetails = {};
 document.addEventListener('DOMContentLoaded', () => {
 
     // ===== STATE MANAGEMENT =====
@@ -75,20 +78,133 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const checkout = () => {
-        const cart = getCart();
-        if (cart.length === 0) {
+    // DELETE your old 'checkout' function and ADD all of the following functions
+
+    const startConfetti = () => {
+        const container = document.getElementById('confetti-container');
+        if (!container) return;
+        container.innerHTML = '';
+        const colors = ['#ef4444', '#f59e0b', '#22c55e', '#3b82f6', '#8b5cf6'];
+        for (let i = 0; i < 50; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = `${Math.random() * 100}vw`;
+            confetti.style.animationDelay = `${Math.random() * 2}s`;
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.transform = `scale(${Math.random() * 1.5 + 0.5})`;
+            container.appendChild(confetti);
+        }
+    };
+
+    const openCheckoutModal = (items) => {
+        if (!items || items.length === 0) {
             showToast("Your cart is empty.");
             return;
         }
-        const orders = getOrders();
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        orders.push({ id: Date.now(), date: new Date().toLocaleDateString(), items: cart, total: total });
-        saveOrders(orders);
-        saveCart([]);
-        showToast("Congratulations! Your order is placed.");
-        setTimeout(() => window.location.href = 'myorder.html', 2000);
+        checkoutItems = items;
+        document.getElementById('shipping-address-form').reset();
+        document.getElementById('checkout-form-view').classList.remove('hidden');
+        document.getElementById('checkout-summary-view').classList.add('hidden');
+        document.getElementById('checkout-modal-overlay').classList.remove('hidden');
     };
+
+    const closeCheckoutModal = () => {
+        document.getElementById('checkout-modal-overlay').classList.add('hidden');
+    };
+    
+    const showSummaryView = () => {
+        const form = document.getElementById('shipping-address-form');
+        const formData = new FormData(form);
+        shippingDetails = Object.fromEntries(formData.entries());
+        
+        const productsHtml = checkoutItems.map(item => `
+            <div class="flex items-center text-sm mb-2">
+                <img src="${item.images[0]}" class="w-12 h-12 rounded-md mr-3">
+                <div class="flex-1">
+                    <p class="font-semibold">${item.name}</p>
+                    <p>Qty: ${item.quantity}</p>
+                </div>
+                <p class="font-bold">₹${(item.price * item.quantity).toLocaleString()}</p>
+            </div>
+        `).join('');
+        document.getElementById('summary-product-details').innerHTML = productsHtml;
+
+        const shippingHtml = `
+            <h4 class="text-md font-bold">Shipping to:</h4>
+            <p class="text-sm">${shippingDetails.name}, ${shippingDetails.address}, ${shippingDetails.city}, ${shippingDetails.state} - ${shippingDetails.pincode}</p>
+            <p class="text-sm"><b>Phone:</b> ${shippingDetails.phone}</p>
+        `;
+        document.getElementById('summary-shipping-details').innerHTML = shippingHtml;
+
+        const total = checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        document.getElementById('summary-total-bill').innerHTML = `
+            <p class="text-lg font-bold">Total: <span class="text-primary">₹${total.toLocaleString()}</span></p>
+        `;
+
+        document.getElementById('checkout-form-view').classList.add('hidden');
+        document.getElementById('checkout-summary-view').classList.remove('hidden');
+    };
+
+    const redirectToWhatsApp = (order) => {
+        const phoneNumber = "8929083904"; // Your WhatsApp number
+        let message = `*New Order Received!* - Stylfie Optics\n\n`;
+        message += `*Order ID:* ${order.id}\n`;
+        message += `*Date:* ${order.date}\n\n`;
+        message += `*Customer Details:*\n`;
+        message += `Name: ${order.customer.name}\n`;
+        message += `Phone: ${order.customer.phone}\n`;
+        message += `Address: ${order.customer.address}, ${order.customer.city}, ${order.customer.state} - ${order.customer.pincode}\n`;
+        if (order.customer.landmark) {
+            message += `Landmark: ${order.customer.landmark}\n`;
+        }
+        message += `\n*Order Items:*\n`;
+        order.items.forEach(item => {
+            message += `- ${item.name} (Qty: ${item.quantity}) - ₹${(item.price * item.quantity).toLocaleString()}\n`;
+        });
+        message += `\n*Total Bill:* *₹${order.total.toLocaleString()}*`;
+
+        const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+    
+    // REPLACE your old placeFinalOrder function with this new one
+const placeFinalOrder = () => {
+    const total = checkoutItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const newOrder = { 
+        id: Date.now(), 
+        date: new Date().toLocaleDateString(), 
+        items: checkoutItems, 
+        total: total,
+        customer: shippingDetails
+    };
+
+    const allOrders = getOrders();
+    allOrders.push(newOrder);
+    saveOrders(allOrders);
+    
+    // --- IMPORTANT CHANGES START HERE ---
+
+    // 1. Pehle cart clear karein aur UI turant update karein
+    saveCart([]); 
+    updateCartCount();
+    closeCheckoutModal();
+
+    // 2. Heavy kaam (animation, redirect) ko thoda delay karein
+    // Isse UI update block nahi hoga aur app fast feel hogi
+    setTimeout(() => {
+        document.getElementById('congrats-overlay').classList.remove('hidden');
+        startConfetti();
+        redirectToWhatsApp(newOrder);
+        
+        // 8 seconds ke baad congrats screen hide karein
+        setTimeout(() => {
+           const congratsOverlay = document.getElementById('congrats-overlay');
+           if (congratsOverlay) {
+               congratsOverlay.classList.add('hidden');
+           }
+        }, 8000);
+    }, 100); // 100ms ka chhota sa delay
+};
     
     const removeOrder = (orderId) => {
         let orders = getOrders();
@@ -166,22 +282,30 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p class="price">₹${product.price.toLocaleString()}</p>
                     <p class="description">${product.description}</p>
                     <div class="actions">
-                        <div class="quantity-slider-group">
-                            <div class="label">
-                                <span>Quantity</span>
-                                <span id="quantity-value">1</span>
-                            </div>
-                            <input type="range" id="quantity-slider" min="1" max="30" value="1" class="quantity-slider">
-                        </div>
-                        <div class="button-group">
-                           <button class="add-to-cart-btn-main" data-product-id="${product.id}">
-                               <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
-                           </button>
-                           <button class="wishlist-btn-detail wishlist-btn" data-product-id="${product.id}">
-                              ${heartIcon}
-                           </button>
-                        </div>
-                    </div>
+    <div class="quantity-slider-group">
+        <div class="label">
+            <span>Quantity</span>
+            <span id="quantity-value">1</span>
+        </div>
+        <input type="range" id="quantity-slider" min="1" max="30" value="1" class="quantity-slider">
+    </div>
+    
+    <button class="add-power-btn" data-product-id="${product.id}">
+        <i class="fas fa-bolt mr-2"></i>Add Power Lenses
+    </button>
+
+    <div class="button-group">
+       <button class="add-to-cart-btn-main" data-product-id="${product.id}">
+           <i class="fas fa-shopping-cart mr-2"></i>Add to Cart
+       </button>
+       <button class="buy-now-btn" data-product-id="${product.id}">
+            <i class="fas fa-rocket mr-2"></i>Buy Now
+       </button>
+       <button class="wishlist-btn-detail wishlist-btn" data-product-id="${product.id}">
+          ${heartIcon}
+       </button>
+    </div>
+</div>
                 </div>
             </div>`;
 
@@ -371,17 +495,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // REPLACE your entire old document.body.addEventListener('click',...) with this
     document.body.addEventListener('click', (e) => {
-        if(e.target.matches('#clear-filters-btn')) {
-            document.querySelectorAll('.filter-checkbox').forEach(c => c.checked = false);
-            const priceRange = document.getElementById('price-range');
-            if(priceRange) {
-                priceRange.value = priceRange.max;
-                document.getElementById('price-value').textContent = priceRange.max;
-            }
-            return; // Sirf clear karein, apply nahi
+        // Modal and Congrats screen buttons
+        if (e.target.matches('#close-checkout-modal') || e.target.closest('#close-checkout-modal')) {
+            closeCheckoutModal();
+            return;
         }
-        
+        if (e.target.matches('#back-to-form-btn')) {
+            document.getElementById('checkout-form-view').classList.remove('hidden');
+            document.getElementById('checkout-summary-view').classList.add('hidden');
+            return;
+        }
+        if (e.target.matches('#final-checkout-btn')) {
+            placeFinalOrder();
+            return;
+        }
+        if (e.target.matches('#close-congrats-btn') || e.target.closest('#congrats-overlay')) {
+            document.getElementById('congrats-overlay').classList.add('hidden');
+            return;
+        }
+
+        // Thumbnail logic
         const thumbnail = e.target.closest('.thumbnail-img');
         if (thumbnail) {
             const mainImage = document.querySelector('.main-image');
@@ -390,15 +525,26 @@ document.addEventListener('DOMContentLoaded', () => {
             thumbnail.classList.add('active');
             return;
         }
+        
+        // General button logic
         const btn = e.target.closest('button');
         if (!btn) return;
 
-        // Baki sabhi buttons ka logic
         const productId = parseInt(btn.dataset.productId);
+
         if (btn.matches('.add-to-cart-btn-main')) {
             const quantitySlider = document.getElementById('quantity-slider');
             const quantity = parseInt(quantitySlider.value);
             addToCart(productId, quantity);
+        } else if (btn.matches('.buy-now-btn')) {
+            const quantitySlider = document.getElementById('quantity-slider');
+            const quantity = parseInt(quantitySlider.value);
+            const product = products.find(p => p.id === productId);
+            openCheckoutModal([{...product, quantity: quantity}]); // Open modal for single item
+        } else if (btn.matches('#checkoutButton')) {
+            openCheckoutModal(getCart()); // Open modal for the whole cart
+        } else if (btn.matches('.add-power-btn')) {
+            showToast('Power lens selection feature coming soon!');
         } else if (btn.matches('.remove-from-cart-btn')) {
             showToast('Item removed from cart.');
             removeFromCart(productId);
@@ -409,11 +555,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (btn.matches('.move-to-cart-btn')) {
             addToCart(productId, 1);
             toggleWishlist(productId, null);
-        } else if (btn.matches('#checkoutButton')) {
-            checkout();
         } else if (btn.matches('.remove-order-btn')) {
             const orderId = parseInt(btn.dataset.orderId);
             removeOrder(orderId);
+        }
+    });
+
+    // New event listener for the form submission
+    document.addEventListener('submit', (e) => {
+        if (e.target.matches('#shipping-address-form')) {
+            e.preventDefault();
+            showSummaryView();
         }
     });
     // ===== INITIALIZE PAGE =====
@@ -433,6 +585,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (pageId === 'orders-page-body') {
         renderOrdersPage();
     }
+    // YEH NAYI LINE ADD KARNI HAI
+    loadStateFromLocalStorage();
+    
     updateCartCount();
 });
 //////////////////////////////////////////////////////////////////////////////////
