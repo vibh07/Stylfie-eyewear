@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body id="home-page-body">
     <div id="toast" class="toast"></div>
 
@@ -15,161 +17,251 @@
         <div class="max-w-screen-xl mx-auto px-6 flex justify-between items-center">
             <a href="index.html" class="text-3xl font-bold" style="color: var(--primary-color);">Stylfie Optics</a>
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="index.html" class="font-medium text-gray-700 hover:text-blue-600">Home</a>
+                <a href="home.html" class="font-medium text-gray-700 hover:text-blue-600">Home</a>
                 <a href="shop.html" class="font-medium text-gray-700 hover:text-blue-600">Shop</a>
                 <a href="myorder.html" class="font-medium text-gray-700 hover:text-blue-600">My Orders</a>
-                <a href="wishlist.html" class="text-2xl text-gray-700 hover:text-blue-600 relative"><i class="fas fa-heart"></i></a>
-                <a href="cart.html" class="text-2xl text-gray-700 hover:text-blue-600 relative">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count-badge">0</span>
-                </a>
             </nav>
+
+<div class="flex items-center space-x-4">
+    <a href="wishlist.html" class="text-2xl text-gray-700 hover:text-blue-600 relative hidden md:block"><i class="fas fa-heart"></i></a>
+    <a href="cart.html" class="text-2xl text-gray-700 hover:text-blue-600 relative hidden md:block">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count-badge">0</span>
+    </a>
+    <a id="whatsapp-header-btn" href="#" class="text-2xl text-green-500 hover:text-green-600 md:hidden"><i class="fab fa-whatsapp"></i></a>
+    <button id="menu-toggle-btn" class="text-2xl text-gray-700 hover:text-blue-600 md:hidden"><i class="fas fa-ellipsis-v"></i></button>
+</div>
         </div>
     </header>
+    <div id="dropdown-menu" class="dropdown-menu">
+    <!-- <a href="myorder.html" class="dropdown-item flex items-center"><i class="fas fa-box w-6 mr-3"></i>My Orders</a>
+    <a href="wishlist.html" class="dropdown-item flex items-center"><i class="fas fa-heart w-6 mr-3"></i>Wishlist</a>
+    <a href="cart.html" class="dropdown-item flex items-center"><i class="fas fa-shopping-cart w-6 mr-3"></i>Cart</a>
+    <hr class="my-2"> -->
+    <a href="#" class="dropdown-item">About Us</a>
+    <a href="#" class="dropdown-item">Contact</a>
+    <a href="#" class="dropdown-item">Instagram</a>
+    <a href="#" class="dropdown-item">Blog</a>
+</div>
+<a id="whatsapp-floating-btn" href="#" class="whatsapp-floating-btn">
+    <i class="fab fa-whatsapp text-3xl"></i>
+</a>
+
+
+
+<script src="data.js"></script>
+<script src="main.js"></script>
 
     <main class="max-w-screen-xl mx-auto p-4 md:p-6">
         <div class="banner-container relative w-full rounded-2xl overflow-hidden shadow-lg mb-8">
-    <img id="banner-image" src="..." alt="Sale Banner" class="w-full h-auto object-cover">
-     <div id="banner-indicators" class="banner-indicators"></div>
-</div>
+            <img id="banner-image" src="..." alt="Sale Banner" class="w-full h-auto object-cover">
+            <div id="banner-indicators" class="banner-indicators"></div>
+        </div>
         <section class="mb-12">
-    <h3 class="text-2xl font-bold mb-4 text-gray-800">Services</h3>
-    <div class="services-container">
-        <a href="#" class="service-card">
-            <div class="service-text">
-                <h4 class="service-title">Prescription Glasses</h4>
-                <p class="service-subtitle">Customized vision correction</p>
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">Services</h3>
+            <div class="services-container">
+                <a href="#" class="service-card">
+                    <div class="service-text">
+                        <h4 class="service-title">Prescription Glasses</h4>
+                        <p class="service-subtitle">Customized vision correction</p>
+                    </div>
+                    <img src="https://images.pexels.com/photos/2846814/pexels-photo-2846814.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Prescription Glasses" class="service-image">
+                </a>
+                <a href="#" class="service-card">
+                    <div class="service-text">
+                        <h4 class="service-title">Lenses Only</h4>
+                        <p class="service-subtitle">Upgrade your existing frames</p>
+                    </div>
+                    <img src="https://images.pexels.com/photos/3951600/pexels-photo-3951600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Lenses Only" class="service-image">
+                </a>
+                <a href="#" class="service-card">
+                    <div class="service-text">
+                        <h4 class="service-title">Contact Lenses</h4>
+                        <p class="service-subtitle">Daily, weekly, and monthly options</p>
+                    </div>
+                    <img src="https://images.pexels.com/photos/4058411/pexels-photo-4058411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Contact Lenses" class="service-image">
+                </a>
+                <a href="#" class="service-card">
+                    <div class="service-text">
+                        <h4 class="service-title">Sunglasses/Without Power Frames</h4>
+                        <p class="service-subtitle">Stylish protection from the sun</p>
+                    </div>
+                    <img src="https://images.pexels.com/photos/701877/pexels-photo-701877.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                        alt="Sunglasses" class="service-image">
+                </a>
             </div>
-            <img src="https://images.pexels.com/photos/2846814/pexels-photo-2846814.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Prescription Glasses" class="service-image">
-        </a>
-        <a href="#" class="service-card">
-            <div class="service-text">
-                <h4 class="service-title">Lenses Only</h4>
-                <p class="service-subtitle">Upgrade your existing frames</p>
+        </section>
+        <section class="mb-12">
+            <div class="flex items-center gap-2 mb-4">
+                <h3 class="text-2xl font-bold text-gray-800">Eyeglasses</h3>
+                <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">with Power</span>
             </div>
-            <img src="https://images.pexels.com/photos/3951600/pexels-photo-3951600.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Lenses Only" class="service-image">
-        </a>
-        <a href="#" class="service-card">
-            <div class="service-text">
-                <h4 class="service-title">Contact Lenses</h4>
-                <p class="service-subtitle">Daily, weekly, and monthly options</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <a href="shop.html?type=frames&category=men"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static1.lenskart.com/media/desktop/img/24-oct-24/eye-landing-page/Home-all-online-exclusive-eyeglasses-3_4.png"
+                        alt="Men Eyeglasses" class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Men</span> -->
+                </a>
+                <a href="shop.html?type=frames&category=women"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static1.lenskart.com/media/desktop/img/24-oct-24/eye-landing-page/Home-all-online-exclusive-eyeglasses-3_4-1.png"
+                        alt="Women Eyeglasses" class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Women</span> -->
+                </a>
+                <a href="shop.html?type=frames&category=kids"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static1.lenskart.com/media/desktop/img/24-oct-24/eye-landing-page/Home-all-online-exclusive-eyeglasses-3_4-2.png"
+                        alt="Kids Eyeglasses" class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Kids</span> -->
+                </a>
+                <a href="shop.html?category=eyeglasses&sale=true"
+                    class="category-card category-card-red bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center relative transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Eyeglass04_22092025.png"
+                        alt="On Sale Eyeglasses" class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">On Sale</span> -->
+                </a>
             </div>
-            <img src="https://images.pexels.com/photos/4058411/pexels-photo-4058411.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Contact Lenses" class="service-image">
-        </a>
-        <a href="#" class="service-card">
-            <div class="service-text">
-                <h4 class="service-title">Sunglasses/Without Power Frames</h4>
-                <p class="service-subtitle">Stylish protection from the sun</p>
-            </div>
-            <img src="https://images.pexels.com/photos/701877/pexels-photo-701877.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Sunglasses" class="service-image">
-        </a>
-    </div>
-</section>
-<section class="mb-12">
-    <div class="flex items-center gap-2 mb-4">
-        <h3 class="text-2xl font-bold text-gray-800">Eyeglasses</h3>
-        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">with Power</span>
-    </div>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <a href="shop.html?type=frames&category=men" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static1.lenskart.com/media/desktop/img/24-oct-24/eye-landing-page/Home-all-online-exclusive-eyeglasses-3_4.png" alt="Men Eyeglasses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Men</span> -->
-        </a>
-        <a href="shop.html?type=frames&category=women" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static1.lenskart.com/media/desktop/img/24-oct-24/eye-landing-page/Home-all-online-exclusive-eyeglasses-3_4-1.png" alt="Women Eyeglasses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Women</span> -->
-        </a>
-        <a href="shop.html?type=frames&category=kids" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static1.lenskart.com/media/desktop/img/24-oct-24/eye-landing-page/Home-all-online-exclusive-eyeglasses-3_4-2.png" alt="Kids Eyeglasses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Kids</span> -->
-        </a>
-        <a href="shop.html?category=eyeglasses&sale=true" class="category-card category-card-red bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center relative transition-transform hover:scale-105">
-    <img src="https://static5.lenskart.com/media/uploads/Eyeglass04_22092025.png" alt="On Sale Eyeglasses" class="w-full h-auto object-contain mb-2">
-    <!-- <span class="font-medium text-gray-700 text-sm">On Sale</span> -->
-</a>
-    </div>
-</section>
+        </section>
 
-<section class="mb-12">
-    <h3 class="text-2xl font-bold mb-4 text-gray-800">Sunglasses</h3>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <a href="shop.html?type=sunglasses&category=men" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/Sunglass_01-GJ-180825.png" alt="Men Sunglasses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Men</span> -->
-        </a>
-        <a href="shop.html?type=sunglasses&category=women" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/Sunglass_02-GJ-180825.png" alt="Women Sunglasses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Women</span> -->
-        </a>
-        <a href="shop.html?type=sunglasses&category=kids" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/Sunglass03-GJ-180825.png" alt="Kids Sunglasses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Kids</span> -->
-        </a>
-       <a href="shop.html?category=sunglasses&sale=true" class="category-card category-card-red bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center relative transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/Sunglass04-13sep.png" alt="On Sale Sunglasses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">On Sale</span> -->
-        </a>
-    </div>
-</section>
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">Sunglasses</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <a href="shop.html?type=sunglasses&category=men"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Sunglass_01-GJ-180825.png" alt="Men Sunglasses"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Men</span> -->
+                </a>
+                <a href="shop.html?type=sunglasses&category=women"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Sunglass_02-GJ-180825.png"
+                        alt="Women Sunglasses" class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Women</span> -->
+                </a>
+                <a href="shop.html?type=sunglasses&category=kids"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Sunglass03-GJ-180825.png" alt="Kids Sunglasses"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Kids</span> -->
+                </a>
+                <a href="shop.html?category=sunglasses&sale=true"
+                    class="category-card category-card-red bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center relative transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Sunglass04-13sep.png" alt="On Sale Sunglasses"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">On Sale</span> -->
+                </a>
+            </div>
+        </section>
 
-<section class="mb-12">
-    <h3 class="text-2xl font-bold mb-4 text-gray-800">Stylfie Specials</h3>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <a href="shop.html?type=frames" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/Progressive29082025_rat.png" alt="Progressive" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Progressive</span> -->
-        </a>
-        <a href="shop.html?type=frames" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/Special_Power01-GJ-180825.png" alt="Zero Power" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Zero Power</span> -->
-        </a>
-        <a href="shop.html?type=frames" class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/Special_Power03-GJ-180825.png" alt="Reading" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Reading</span> -->
-        </a>
-         <a href="shop.html?type=sunglasses" class="category-card category-card-yellow bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center relative transition-transform hover:scale-105">
-            <img src="https://static5.lenskart.com/media/uploads/SpecialPower04-13sep.png" alt="Power Sun" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Power Sun</span> -->
-        </a>
-    </div>
-</section>
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">Stylfie Specials</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <a href="shop.html?type=frames"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Progressive29082025_rat.png" alt="Progressive"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Progressive</span> -->
+                </a>
+                <a href="shop.html?type=frames"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Special_Power01-GJ-180825.png" alt="Zero Power"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Zero Power</span> -->
+                </a>
+                <a href="shop.html?type=frames"
+                    class="category-card bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/Special_Power03-GJ-180825.png" alt="Reading"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Reading</span> -->
+                </a>
+                <a href="shop.html?type=sunglasses"
+                    class="category-card category-card-yellow bg-white rounded-xl shadow-sm p-4 flex flex-col items-center justify-center text-center relative transition-transform hover:scale-105">
+                    <img src="https://static5.lenskart.com/media/uploads/SpecialPower04-13sep.png" alt="Power Sun"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Power Sun</span> -->
+                </a>
+            </div>
+        </section>
 
-<section class="mb-12">
-    <h3 class="text-2xl font-bold mb-4 text-gray-800">Contact Lenses & Accessories</h3>
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <a href="#" class="category-card bg-white ... coming-soon-btn"><img src="https://static5.lenskart.com/media/uploads/Clear-lens-cl-grid-260825.png" alt="Clear Contact Lenses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Clear</span> -->
-        </a>
-       <a href="#" class="category-card bg-white ... coming-soon-btn">     <img src="https://static5.lenskart.com/media/uploads/color-lens-cl-grid-260825.png" alt="Color Contact Lenses" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Color</span> -->
-        </a>
-       <a href="#" class="category-card bg-white ... coming-soon-btn">     <img src="https://static5.lenskart.com/media/uploads/Accessorie_(1).png" alt="Solution & Accessories" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Solution & Accessories</span> -->
-        </a>
-        <a href="#" class="category-card bg-white ... coming-soon-btn">    <img src="https://static5.lenskart.com/media/uploads/Trial-Pack-x1.png" alt="Trial Pack" class="w-full h-auto object-contain mb-2">
-            <!-- <span class="font-medium text-gray-700 text-sm">Trial Pack</span> -->
-        </a>
-    </div>
-</section>
+        <section class="mb-12">
+            <h3 class="text-2xl font-bold mb-4 text-gray-800">Contact Lenses & Accessories</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <a href="#" class="category-card bg-white ... coming-soon-btn"><img
+                        src="https://static5.lenskart.com/media/uploads/Clear-lens-cl-grid-260825.png"
+                        alt="Clear Contact Lenses" class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Clear</span> -->
+                </a>
+                <a href="#" class="category-card bg-white ... coming-soon-btn"> <img
+                        src="https://static5.lenskart.com/media/uploads/color-lens-cl-grid-260825.png"
+                        alt="Color Contact Lenses" class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Color</span> -->
+                </a>
+                <a href="#" class="category-card bg-white ... coming-soon-btn"> <img
+                        src="https://static5.lenskart.com/media/uploads/Accessorie_(1).png" alt="Solution & Accessories"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Solution & Accessories</span> -->
+                </a>
+                <a href="#" class="category-card bg-white ... coming-soon-btn"> <img
+                        src="https://static5.lenskart.com/media/uploads/Trial-Pack-x1.png" alt="Trial Pack"
+                        class="w-full h-auto object-contain mb-2">
+                    <!-- <span class="font-medium text-gray-700 text-sm">Trial Pack</span> -->
+                </a>
+            </div>
+        </section>
         <section>
             <h3 class="text-2xl font-bold mb-4 text-gray-800">Featured Frames</h3>
             <div id="featured-products-container" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                </div>
+            </div>
         </section>
     </main>
 
     <nav class="bottom-nav md:hidden bg-light p-2 shadow-inner flex justify-around items-center border-t">
-        <a href="index.html" class="flex flex-col items-center p-2" style="color: var(--primary-color);"><i class="fas fa-home text-xl"></i><span class="text-xs">Home</span></a>
-        <a href="shop.html" class="flex flex-col items-center p-2 text-gray-500"><i class="fas fa-store text-xl"></i><span class="text-xs">Shop</span></a>
-        <a href="wishlist.html" class="flex flex-col items-center p-2 text-gray-500"><i class="fas fa-heart text-xl"></i><span class="text-xs">Wishlist</span></a>
+        <a href="index.html" class="flex flex-col items-center p-2" style="color: var(--primary-color);"><i
+                class="fas fa-home text-xl"></i><span class="text-xs">Home</span></a>
+        <a href="shop.html" class="flex flex-col items-center p-2 text-gray-500"><i
+                class="fas fa-store text-xl"></i><span class="text-xs">Shop</span></a>
+        <a href="wishlist.html" class="flex flex-col items-center p-2 text-gray-500"><i
+                class="fas fa-heart text-xl"></i><span class="text-xs">Wishlist</span></a>
         <a href="cart.html" class="flex flex-col items-center p-2 text-gray-500 relative">
             <i class="fas fa-shopping-cart text-xl"></i><span class="text-xs">Cart</span>
             <span class="cart-count-badge" style="top: -2px; right: 5px;">0</span>
         </a>
-        <a href="myorder.html" class="flex flex-col items-center p-2 text-gray-500"><i class="fas fa-box text-xl"></i><span class="text-xs">Orders</span></a>
+        <a href="myorder.html" class="flex flex-col items-center p-2 text-gray-500"><i
+                class="fas fa-box text-xl"></i><span class="text-xs">Orders</span></a>
     </nav>
 
     <script src="data.js"></script>
     <script src="main.js"></script>
+    <footer class="site-footer">
+    <div class="max-w-screen-xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center md:text-left">
+        <div>
+            <h4 class="font-bold mb-4">Quick Links</h4>
+            <a href="home.html" class="footer-link">Home</a>
+            <a href="shop.html" class="footer-link">Shop</a>
+            <a href="myorder.html" class="footer-link">My Orders</a>
+        </div>
+        <div>
+            <h4 class="font-bold mb-4">Company</h4>
+            <a href="#" class="footer-link">About Us</a>
+            <a href="#" class="footer-link">Contact</a>
+            <a href="#" class="footer-link">Blog</a>
+        </div>
+        <div>
+            <h4 class="font-bold mb-4">Social</h4>
+            <a href="#" class="footer-link">Instagram</a>
+            <a href="#" class="footer-link">Facebook</a>
+            <a href="#" class="footer-link">Twitter</a>
+        </div>
+        <div>
+            <h4 class="font-bold mb-4">Stylfie Optics</h4>
+            <p>&copy; 2025 Stylfie Optics. All Rights Reserved.</p>
+        </div>
+    </div>
+</footer>
 </body>
+
 </html>
