@@ -48,8 +48,51 @@
 
     <script src="data.js"></script>
     <script src="main.js"></script>
+    <div id="checkout-modal-overlay" class="checkout-modal-overlay hidden">
+    <div id="checkout-modal-content" class="checkout-modal-content">
+        <div id="checkout-form-view">
+            <div class="modal-header">
+                <h3 class="text-xl font-bold">Shipping Details</h3>
+                <button id="close-checkout-modal" class="text-2xl font-bold">&times;</button>
+            </div>
+            <form id="shipping-address-form" class="p-4 space-y-3">
+                <input class="modal-input" type="text" name="name" placeholder="Full Name" required>
+                <input class="modal-input" type="tel" name="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+                <textarea class="modal-input" name="address" placeholder="Full Address (House No, Street, etc.)" rows="3" required></textarea>
+                <div class="grid grid-cols-2 gap-3">
+                    <input class="modal-input" type="text" name="pincode" placeholder="Pincode" required>
+                    <input class="modal-input" type="text" name="city" placeholder="City" required>
+                </div>
+                <input class="modal-input" type="text" name="state" placeholder="State" required>
+                <input class="modal-input" type="text" name="landmark" placeholder="Nearby Landmark (Optional)">
+                <button type="submit" class="modal-btn-primary">Proceed to Summary</button>
+            </form>
+        </div>
+
+        <div id="checkout-summary-view" class="hidden">
+             <div class="modal-header">
+                <button id="back-to-form-btn" class="text-2xl font-bold">&larr;</button>
+                <h3 class="text-xl font-bold">Confirm Order</h3>
+            </div>
+            <div class="p-4 space-y-4">
+                <div id="summary-product-details" class="summary-section max-h-40 overflow-y-auto"></div>
+                <div id="summary-shipping-details" class="summary-section"></div>
+                <div id="summary-total-bill" class="text-right"></div>
+                <button id="final-checkout-btn" class="modal-btn-primary">Place Order & Send on WhatsApp</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="congrats-overlay" class="congrats-overlay hidden">
+  <div id="confetti-container"></div>
+  <div class="congrats-card">
+    <h2 class="text-3xl font-bold text-green-500">Order Placed!</h2>
+    <p class="mt-2 text-gray-600">Congratulations! Your order is confirmed.</p>
+    <button id="close-congrats-btn" class="mt-6 py-2 px-6 bg-green-500 text-white rounded-lg">Done</button>
+  </div>
+</div>
 </body>
 
 </html>
-
 
