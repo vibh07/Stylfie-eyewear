@@ -5,6 +5,31 @@ const bannerImages = [
     'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-hellokitty-16sep25.png',
     'https://static5.lenskart.com/media/uploads/Desktop-v2-topbanner-zodiac-16sep25.png'
 ];
+// Add this new function anywhere in main.js
+const applyFiltersFromURL = () => {
+    // Get the parameters from the URL (e.g., ?type=frames&category=men)
+    const params = new URLSearchParams(window.location.search);
+    
+    // Get the value of 'type' and 'category' from the URL
+    const type = params.get('type');
+    const category = params.get('category');
+
+    // If 'type' exists in the URL, find the matching checkbox and check it
+    if (type) {
+        const typeCheckbox = document.querySelector(`.filter-checkbox[data-filter="type"][value="${type}"]`);
+        if (typeCheckbox) {
+            typeCheckbox.checked = true;
+        }
+    }
+
+    // If 'category' exists in the URL, find the matching checkbox and check it
+    if (category) {
+        const categoryCheckbox = document.querySelector(`.filter-checkbox[data-filter="category"][value="${category}"]`);
+        if (categoryCheckbox) {
+            categoryCheckbox.checked = true;
+        }
+    }
+};
 // Add these new lines at the top of main.js
 let checkoutItems = [];
 let shippingDetails = {};
@@ -574,6 +599,7 @@ const placeFinalOrder = () => {
         renderProductGrid('featured-products-container', products.slice(0, 4));
         startBannerSlider(); // <-- ADD THIS LINE
     } else if (pageId === 'shop-page-body') {
+         applyFiltersFromURL();
     applyFiltersAndSort();
     setupFilterModal(); // Modal ko setup karne ke liye is line ko jodein
     } else if (pageId === 'product-page-body') {
@@ -629,5 +655,3 @@ const startBannerSlider = () => {
         updateActiveIndicator(currentBannerIndex);
     }, 1500); // Note: I increased this to 3 seconds for a better user experience.
 };
-
-
