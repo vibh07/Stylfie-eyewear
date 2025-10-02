@@ -285,7 +285,12 @@ h1, h2, h3 {
     flex-grow: 1;
     height: 50px;
     font-size: 1rem;
+    background-color: #2ABFAC;
+    border-radius: 8px;
+}.button-group .add-to-cart-btn-main:hover {
+    background-color: #2abfab79;
 }
+
 
 .button-group .wishlist-btn-detail {
     height: 50px;
