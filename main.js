@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 const openWhatsAppQuery = (e) => {
     e.preventDefault();
     const phoneNumber = '918929083904';
-    const message = 'Hi i have a query ?';
+    const message = 'Hi i have an query ?';
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
 };
@@ -700,3 +700,4 @@ const startBannerSlider = () => {
         updateActiveIndicator(currentBannerIndex);
     }, 1500); // Note: I increased this to 3 seconds for a better user experience.
 };
+
