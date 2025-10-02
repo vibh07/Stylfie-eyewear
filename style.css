@@ -812,7 +812,7 @@ h1, h2, h3 {
 /* --- New Dropdown Menu (Mobile) --- */
 .dropdown-menu {
     position: fixed;
-    top: 80px; /* Height of the header */
+    top: 63px; /* Height of the header */
     left: 0;
     right: 0;
     background-color: white;
@@ -901,4 +901,5 @@ h1, h2, h3 {
     display: flex;
     align-items: center;
 }
+
 
