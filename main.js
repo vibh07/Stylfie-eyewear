@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const redirectToWhatsApp = (order) => {
-        const phoneNumber = "8929083904"; // Your WhatsApp number
+        const phoneNumber = "918929083904"; // Your WhatsApp number
         let message = `*New Order Received!* - Stylfie Optics\n\n`;
         message += `*Order ID:* ${order.id}\n`;
         message += `*Date:* ${order.date}\n\n`;
@@ -629,3 +629,4 @@ const startBannerSlider = () => {
         updateActiveIndicator(currentBannerIndex);
     }, 1500); // Note: I increased this to 3 seconds for a better user experience.
 };
+
