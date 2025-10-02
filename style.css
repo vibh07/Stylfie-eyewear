@@ -824,7 +824,7 @@ h1, h2, h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius:7px
+    border-radius: 8px;
 }
 
 .dropdown-menu.open {
@@ -903,5 +903,8 @@ h1, h2, h3 {
     align-items: center;
 }
 
-
-
+/* --- Contact Lens Modal Styles --- */
+#contact-lens-modal .checkout-modal-content {
+    max-width: 500px;
+    position: relative; /* Needed for the close button */
+}
