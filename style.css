@@ -133,8 +133,8 @@ h1, h2, h3 {
 }
 
 .thumbnail-img {
-    width: 80px;
-    height: 80px;
+    width: auto;
+    height: 43px;
     object-fit: cover;
     border-radius: 8px;
     cursor: pointer;
@@ -623,4 +623,187 @@ h1, h2, h3 {
 /* --- Apply Button Fix --- */
 .bg-primary {
     background-color: var(--primary-color); /* Isse button ka background color set hoga */
+}
+/* --- New Product Page Button Styles --- */
+
+/* Power Lenses Button */
+.add-power-btn {
+    width: 100%;
+    height: 50px;
+    font-size: 1rem;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    background-color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.add-power-btn:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+/* Buy Now Button */
+.buy-now-btn {
+    flex-grow: 1; 
+    height: 50px;
+    font-size: 1rem;
+    background-color: var(--cta-color); /* Orange color */
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+
+.buy-now-btn:hover {
+    background-color: #ffac33; /* Lighter orange for hover */
+}
+
+/* Adjust button group for the new button */
+.button-group .add-to-cart-btn-main,
+.button-group .buy-now-btn {
+    flex-grow: 1; /* Both buttons will now share the available space */
+}
+
+.button-group .add-to-cart-btn-main {
+    background-color: #2ABFAC;
+}
+.button-group .add-to-cart-btn-main:hover {
+    background-color: #25a28c;
+}
+/* /////////////////////////////////////////////////////////// */
+
+
+/* --- Checkout Modal Styles --- */
+.checkout-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Align to the bottom */
+}
+
+.checkout-modal-content {
+    background-color: white;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease-out;
+}
+
+.checkout-modal-overlay:not(.hidden) .checkout-modal-content {
+    transform: translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.modal-btn-primary {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.summary-section {
+    padding: 0.75rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+.summary-section h4 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.hidden {
+    display: none;
+}
+
+
+/* --- Congratulations & Confetti Styles --- */
+.congrats-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 150;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.congrats-card {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 16px;
+    text-align: center;
+    transform: scale(0.7);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), opacity 0.3s;
+}
+
+.congrats-overlay:not(.hidden) .congrats-card {
+    transform: scale(1);
+    opacity: 1;
+}
+
+#confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    opacity: 0.7;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
 }
