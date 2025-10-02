@@ -34,6 +34,14 @@ const applyFiltersFromURL = () => {
 let checkoutItems = [];
 let shippingDetails = {};
 document.addEventListener('DOMContentLoaded', () => {
+    // Add this new function inside the DOMContentLoaded listener
+const openWhatsAppQuery = (e) => {
+    e.preventDefault();
+    const phoneNumber = '918929083904';
+    const message = 'Hi i have a query ?';
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank');
+};
 
     // ===== STATE MANAGEMENT =====
     const getCart = () => JSON.parse(localStorage.getItem('stylfieCart_v1')) || [];
@@ -599,6 +607,37 @@ const placeFinalOrder = () => {
             showSummaryView();
         }
     });
+    // Add this code block before the "INITIALIZE PAGE" section
+
+    // --- New Event Listeners for Header Menu and WhatsApp ---
+    const menuToggleBtn = document.getElementById('menu-toggle-btn');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const whatsappHeaderBtn = document.getElementById('whatsapp-header-btn');
+    const whatsappFloatingBtn = document.getElementById('whatsapp-floating-btn');
+
+    if (menuToggleBtn) {
+        menuToggleBtn.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('open');
+        });
+    }
+
+    if(whatsappHeaderBtn) {
+        whatsappHeaderBtn.addEventListener('click', openWhatsAppQuery);
+    }
+    
+    if(whatsappFloatingBtn) {
+        whatsappFloatingBtn.addEventListener('click', openWhatsAppQuery);
+    }
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (e) => {
+        if (!dropdownMenu.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+            dropdownMenu.classList.remove('open');
+        }
+    });
+
+// ===== INITIALIZE PAGE =====
+// ... (rest of the file)
     // ===== INITIALIZE PAGE =====
     const pageId = document.body.id;
     if (pageId === 'home-page-body') {
