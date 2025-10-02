@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const productsHtml = checkoutItems.map(item => `
             <div class="flex items-center text-sm mb-2">
-                <img src="${item.images[0]}" class="w-12 h-12 rounded-md mr-3">
+                <img src="${item.images[0]}" class="w-auto h-12 rounded-md mr-3">
                 <div class="flex-1">
                     <p class="font-semibold">${item.name}</p>
                     <p>Qty: ${item.quantity}</p>
@@ -629,4 +629,5 @@ const startBannerSlider = () => {
         updateActiveIndicator(currentBannerIndex);
     }, 1500); // Note: I increased this to 3 seconds for a better user experience.
 };
+
 
