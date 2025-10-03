@@ -108,4 +108,18 @@ const products = [
         trending: true,
         bestSelling: true
     }
+    {
+    id: 1759505777662,
+    name: "Shaswat mishra",
+    price: 76678,
+    images: [
+        "https://sp.yimg.com/ib/th/id/OIP.DPMzrxt25nP7VQPK76K2tgHaHa?pid=Api&w=148&h=148&c=7&dpr=2&rs=1"
+    ],
+    description: "xzjbzjxbc zxcj ;bzxjk bzxcjk bzxb cjkzx czkxj zkxj cbzjkx cbzxjk czxczxjk cb;zx c",
+    category: "men",
+    type: "frames",
+    trending: false,
+    bestSelling: false
+},
 ];
+
